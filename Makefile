@@ -6,7 +6,7 @@
 #    By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/16 12:59:52 by cstripeb          #+#    #+#              #
-#    Updated: 2020/02/16 14:52:18 by cstripeb         ###   ########.fr        #
+#    Updated: 2020/02/16 20:16:37 by cstripeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,27 +29,26 @@ LIBFT_A = libft.a
 LIBFT_PATH = $(addprefix $(LIB_DIR), libft/)
 LIBFT_AP = $(addprefix $(LIBFT_PATH), $(LIBFT_A))
 LIBFT_I = -I$(LIBFT_PATH)
-LIBFT_L = -l$(LIBFT_PATH) -lft
+LIBFT_L = -L$(LIBFT_PATH) -lft
 INC += $(LIBFT_I)
 LNK += $(LIBFT_L)
 
-LGLFW_A = libglfw3.a
-LGLFW_PATH = $(addprefix $(LIB_DIR), glfw/)
-LGLFW_PATH_A = $(addprefix $(LGLFW_PATH), src/)
-LGLFW_AP = $(addprefix $(LGLFW_PATH_A), $(LGLFW_A))
-LGLFW_I = -I$(addprefix $(LGLFW_PATH), include/)
-LGLFW_L = -L$(LGLFW_PATH_A) -glfw3
+SDL_PATH = $(LIB_DIR)
+SDL_INC = $(addprefix $(INC_DIR), SDL/)
+INC += -I$(SDL_INC) -F./lib/
+LNK += -F./lib/SDL2.framework/ -rpath ./lib/ -framework OpenGL -framework AppKit\
+		-framework SDL2 
 
 .PHONY: all
 all: $(NAME)
 
-$(NAME): $(LGLFW_AP) $(LIBFT_AP) $(OBJS)
-	$(CC) $(INC) $(OBJS) -o $(NAME)
+$(NAME): $(LIBFT_AP) $(OBJS)
+	$(CC) $(INC) $(LNK) $(OBJS) -o $(NAME)
 
-$(OBJS): $(OBJ_DIR)
+$(OBJS): $(OBJ_DIR) $(INC_DIR)/wolf3d.h
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	$(CC) -MD $(INC) -c $< -o $@
+	$(CC) $(INC) -c $< -o $@
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
@@ -57,8 +56,6 @@ $(OBJ_DIR):
 $(LIBFT_AP):
 	@$(MAKE) -C $(LIBFT_PATH)
 
-$(LGLFW_AP):
-	@$(MAKE) -C $(LGLFW_PATH)
 
 .PHONY: clean
 clean:
@@ -67,7 +64,6 @@ clean:
 .PHONY: fclean
 fclean: clean
 	@$(MAKE) -C $(LIBFT_PATH) fclean
-	@$(MAKE) -C $(LGLFW_PATH) clean
 	@rm -f $(NAME)
 
 .PHONY: re
