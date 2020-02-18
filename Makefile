@@ -6,7 +6,7 @@
 #    By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/16 12:59:52 by cstripeb          #+#    #+#              #
-#    Updated: 2020/02/16 20:16:37 by cstripeb         ###   ########.fr        #
+#    Updated: 2020/02/18 18:23:24 by cstripeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ INC_DIR = ./include/
 LIB_DIR = ./lib/
 OBJ_DIR = ./objs/
 
-F_SRCS = main.c
+F_SRCS = main.c initializations_1.c game_loop.c
 SRCS = $(addprefix $(SRC_DIR), $(F_SRCS))
 OBJS = $(addprefix $(OBJ_DIR), $(F_SRCS:.c=.o))
 
@@ -35,9 +35,9 @@ LNK += $(LIBFT_L)
 
 SDL_PATH = $(LIB_DIR)
 SDL_INC = $(addprefix $(INC_DIR), SDL/)
-INC += -I$(SDL_INC) -F./lib/
-LNK += -F./lib/SDL2.framework/ -rpath ./lib/ -framework OpenGL -framework AppKit\
-		-framework SDL2 
+INC += -I$(SDL_INC)
+LNK += -F./lib/ -rpath ./lib/ -framework OpenGL -framework AppKit \
+		-framework SDL2
 
 .PHONY: all
 all: $(NAME)
