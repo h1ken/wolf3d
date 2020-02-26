@@ -76,4 +76,6 @@ typedef struct	s_wolf3d
 
 int				init(t_wolf3d **wolf, t_sdl_info **i_sdl);
 void			loop(t_wolf3d *wolf, t_sdl_info *i_sdl);
+void			put_pixel_to_surf(int x, int y, SDL_Surface *trgt,
+								  unsigned int color);
 #endif

@@ -18,26 +18,20 @@ void	loop(t_wolf3d *wolf, t_sdl_info *i_sdl)
 	int			x;
 	SDL_Event	e;
 
-	uint32_t *ttmp;
 	wolf->w_surf = SDL_GetWindowSurface(i_sdl->w);
-	ttmp = (uint32_t *)wolf->w_surf->pixels;
-x = -1;
-	while (++x < 20)
-	{
-		ttmp[10 + x * wolf->w_surf->w] = 0x00ff00ff;
-		ttmp[11 + x * wolf->w_surf->w] = 0x00ff00ff;
-		ttmp[12 + x * wolf->w_surf->w] = 0x00ff00ff;
-		ttmp[13 + x * wolf->w_surf->w] = 0x00ffffff;
-		ttmp[14 + x * wolf->w_surf->w] = 0x00ffffff;
-	}
-	SDL_UpdateWindowSurface(i_sdl->w);
 	x = 0;
-	while (!x)
+	while (x != -1)
 	{
 		while (SDL_PollEvent(&e) != 0)
 		{
 			if (e.type == SDL_QUIT)
-				x = 1;
+				x = -1;
+			if (e.type == SDL_KEYDOWN)
+			{
+				put_pixel_to_surf(x, x, wolf->w_surf, 0x000fffff);
+				x++;
+				SDL_UpdateWindowSurface(i_sdl->w);
+			}
 		}
 	}
 }

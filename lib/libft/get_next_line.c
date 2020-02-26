@@ -41,7 +41,8 @@ static int		get_line(char **line, t_data *data, int flag)
 	size_t	l;
 	char	*tmp;
 
-	l = flag ? ft_strchr(data->str, flag) - data->str : data->str_len;
+	l = flag ? (size_t)(ft_strchr(data->str, flag) - data->str)
+		: data->str_len;
 	if (!flag && l == 0)
 	{
 		return (0);

@@ -13,12 +13,14 @@
 NAME = wolf3d
 CC = gcc
 
+UNAME_OS = $(shell uname -s)
+
 SRC_DIR = ./src/
 INC_DIR = ./include/
 LIB_DIR = ./lib/
 OBJ_DIR = ./objs/
 
-F_SRCS = main.c initializations_1.c game_loop.c
+F_SRCS = main.c initializations_1.c game_loop.c draw_functions.c
 SRCS = $(addprefix $(SRC_DIR), $(F_SRCS))
 OBJS = $(addprefix $(OBJ_DIR), $(F_SRCS:.c=.o))
 
@@ -36,14 +38,20 @@ LNK += $(LIBFT_L)
 SDL_PATH = $(LIB_DIR)
 SDL_INC = $(addprefix $(INC_DIR), SDL/)
 INC += -I$(SDL_INC)
-LNK += -F./lib/ -rpath ./lib/ -framework OpenGL -framework AppKit \
+ifeq ($(UNAME_OS),Darwin)
+	LNK += -F./lib/ -rpath ./lib/ -framework OpenGL -framework AppKit \
 		-framework SDL2
+endif
+ifeq ($(UNAME_OS),Linux)
+	LNK += -lSDL2
+endif
 
 .PHONY: all
 all: $(NAME)
 
 $(NAME): $(LIBFT_AP) $(OBJS)
-	$(CC) $(INC) $(LNK) $(OBJS) -o $(NAME)
+#	$(CC) $(INC) $(LNK) $(OBJS) -o $(NAME)
+	gcc -o $(NAME) $(OBJS) $(INC) $(LNK)
 
 $(OBJS): $(OBJ_DIR) $(INC_DIR)/wolf3d.h
 
