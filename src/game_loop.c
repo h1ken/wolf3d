@@ -28,7 +28,8 @@ void	loop(t_wolf3d *wolf, t_sdl_info *i_sdl)
 				x = -1;
 			if (e.type == SDL_KEYDOWN)
 			{
-				put_pixel_to_surf(x, x, wolf->w_surf, 0x000fffff);
+				put_pixel_to_surf(x, x, wolf->w_surf, 0xba0fffff);
+				put_pixel_to_surf(640 - x - 1, x, wolf->w_surf, 0x000fffff);
 				x++;
 				SDL_UpdateWindowSurface(i_sdl->w);
 			}
