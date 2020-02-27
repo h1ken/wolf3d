@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-#include <stdint.h>
 
 void	loop(t_wolf3d *wolf, t_sdl_info *i_sdl)
 {
@@ -20,6 +19,7 @@ void	loop(t_wolf3d *wolf, t_sdl_info *i_sdl)
 
 	wolf->w_surf = SDL_GetWindowSurface(i_sdl->w);
 	x = 0;
+	SDL_UpdateWindowSurface(i_sdl->w);
 	while (x != -1)
 	{
 		while (SDL_PollEvent(&e) != 0)
@@ -28,11 +28,10 @@ void	loop(t_wolf3d *wolf, t_sdl_info *i_sdl)
 				x = -1;
 			if (e.type == SDL_KEYDOWN)
 			{
-				put_pixel_to_surf(x, x, wolf->w_surf, 0xba0fffff);
-				put_pixel_to_surf(640 - x - 1, x, wolf->w_surf, 0x000fffff);
-				x++;
-				SDL_UpdateWindowSurface(i_sdl->w);
+				if (e.key.keysym.sym == SDLK_ESCAPE)
+					x = -1;
 			}
+			SDL_UpdateWindowSurface(i_sdl->w);
 		}
 	}
 }

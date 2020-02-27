@@ -22,8 +22,6 @@
 
 # define CHUNK_SIZE 64
 
-typedef unsigned int t_uint;
-
 typedef struct	s_vec3i
 {
 	int			x;
@@ -49,7 +47,8 @@ typedef struct	s_vec4f
 typedef struct	s_unit
 {
 	t_vec3i		pos;
-	t_vec3f		view;
+	float			view_x;
+	int			view_y;
 	t_vec3f		move;
 	char		flags;
 }				t_unit;
@@ -70,7 +69,6 @@ typedef struct	s_wolf3d
 {
 	t_unit		*player;
 	SDL_Surface	*w_surf;
-	t_uint		*tmp;
 	t_map		*map;
 }				t_wolf3d;
 
