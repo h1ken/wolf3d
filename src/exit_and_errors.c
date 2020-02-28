@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   exit_and_errors.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/16 13:39:30 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/02/28 19:30:32 by cstripeb         ###   ########.fr       */
+/*   Created: 2020/02/28 16:31:47 by cstripeb          #+#    #+#             */
+/*   Updated: 2020/02/28 16:35:03 by cstripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int	main(int ac, char **av)
+void	terminate(char *msg)
 {
-	t_wolf3d	*wolf;
-	t_sdl_info	*i_sdl;
-
-	init(&wolf, &i_sdl);
-	create_window(i_sdl);
-	//read_map(av[1], wolf);
-	loop(wolf, i_sdl); ////////////////////////////////////////////////////////
-	SDL_DestroyWindow(i_sdl->w);
-	SDL_Quit();
-	return (0);
+	if (errno == 0)
+		ft_putendl_fd(msg, 2);
+	else
+		perror(msg);
+	exit(1);
 }

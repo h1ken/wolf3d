@@ -6,7 +6,7 @@
 /*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:20:18 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/02/18 22:12:54 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/02/28 13:44:54 by cstripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,18 @@ void	loop(t_wolf3d *wolf, t_sdl_info *i_sdl)
 	SDL_Event	e;
 
 	wolf->w_surf = SDL_GetWindowSurface(i_sdl->w);
-	x = 0;
+	x = 1;
 	SDL_UpdateWindowSurface(i_sdl->w);
-	while (x != -1)
+	while (x)
 	{
 		while (SDL_PollEvent(&e) != 0)
 		{
 			if (e.type == SDL_QUIT)
-				x = -1;
-			if (e.type == SDL_KEYDOWN)
-			{
-				if (e.key.keysym.sym == SDLK_ESCAPE)
-					x = -1;
-			}
+				x = 0;
+			else if (e.type == SDL_KEYDOWN)
+				x = key_press_handle(e.key, wolf);
+			else if (e.type == SDL_KEYUP)
+				x = key_up_handle(e.key, wolf);
 			SDL_UpdateWindowSurface(i_sdl->w);
 		}
 	}

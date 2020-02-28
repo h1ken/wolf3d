@@ -6,7 +6,7 @@
 /*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:15:16 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/02/18 19:20:26 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/02/28 16:17:37 by cstripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,19 @@ int			init(t_wolf3d **wolf, t_sdl_info **i_sdl)
 {
 	init_wolf3d(wolf);
 	init_sdl_info(i_sdl);
+	return (0);
+}
+
+int			create_window(t_sdl_info *i_sdl)
+{
+	i_sdl->w = SDL_CreateWindow(WOLF_WINDOW_NAME,
+							SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+							WOLF_WINDOW_W, WOLF_WINDOW_H,
+							SDL_WINDOW_SHOWN);
+	if (i_sdl->w == NULL)
+	{
+		ft_putendl("Hello");
+		return (1);
+	}
 	return (0);
 }

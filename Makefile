@@ -6,7 +6,7 @@
 #    By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/16 12:59:52 by cstripeb          #+#    #+#              #
-#    Updated: 2020/02/18 18:23:24 by cstripeb         ###   ########.fr        #
+#    Updated: 2020/02/28 16:36:10 by cstripeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ INC_DIR = ./include/
 LIB_DIR = ./lib/
 OBJ_DIR = ./objs/
 
-F_SRCS = main.c initializations_1.c game_loop.c draw_functions.c
+F_SRCS = main.c initializations_1.c game_loop.c draw_functions.c \
+		 keyboard_handle.c read_func.c exit_and_errors.c
 SRCS = $(addprefix $(SRC_DIR), $(F_SRCS))
 OBJS = $(addprefix $(OBJ_DIR), $(F_SRCS:.c=.o))
 
@@ -53,7 +54,7 @@ $(NAME): $(LIBFT_AP) $(OBJS)
 #	$(CC) $(INC) $(LNK) $(OBJS) -o $(NAME)
 	gcc -o $(NAME) $(OBJS) $(INC) $(LNK)
 
-$(OBJS): $(OBJ_DIR) $(INC_DIR)/wolf3d.h
+$(OBJS): $(INC_DIR)/wolf3d.h $(INC_DIR)/wolf3d_defines.h | $(OBJ_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(INC) -c $< -o $@
