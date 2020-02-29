@@ -6,7 +6,7 @@
 /*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:15:16 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/02/28 16:17:37 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/02/29 18:39:57 by cstripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,24 @@
 static int	init_wolf3d(t_wolf3d **wolf)
 {
 	if (!(*wolf = (t_wolf3d *)ft_memalloc(sizeof(**wolf))))
-	{
-		ft_putendl("ALLOC");
-		return (1);
-	}
+		terminate("t_wolf3d malloc");
+	if (!((*wolf)->map = (t_map *)ft_memalloc(sizeof(*((*wolf)->map)))))
+		terminate("Malloc error for t_map");
+	(*wolf)->map->w = 0;
+	(*wolf)->map->h = 0;
+	if (!((*wolf)->player = (t_unit *)ft_memalloc(sizeof(*((*wolf)->player)))))
+		terminate("t_unit malloc (player)");
+	(*wolf)->player->pos.x = -1;
+	(*wolf)->player->pos.y = -1;
 	return (0);
 }
 
 static int	init_sdl_info(t_sdl_info **i_sdl)
 {
 	if (!(*i_sdl = (t_sdl_info *)ft_memalloc(sizeof(**i_sdl))))
-	{
-		ft_putendl("ALLOC sdl");
-		return (1);
-	}
+		terminate("i_sdl malloc");
 	if (SDL_Init(SDL_INIT_EVERYTHING))
-	{
-		ft_putendl("Hello");
-		return (1);
-	}
+		terminate("SDL_Init error");
 	return (0);
 }
 
@@ -51,9 +50,10 @@ int			create_window(t_sdl_info *i_sdl)
 							WOLF_WINDOW_W, WOLF_WINDOW_H,
 							SDL_WINDOW_SHOWN);
 	if (i_sdl->w == NULL)
-	{
-		ft_putendl("Hello");
-		return (1);
-	}
+		terminate("Error in window creation");
 	return (0);
+}
+
+int			create_grid()
+{
 }

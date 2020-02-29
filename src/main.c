@@ -6,7 +6,7 @@
 /*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 13:39:30 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/02/28 19:30:32 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/02/29 17:20:18 by cstripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int ac, char **av)
 
 	init(&wolf, &i_sdl);
 	create_window(i_sdl);
-	//read_map(av[1], wolf);
+	read_map(av[1], wolf);
 	loop(wolf, i_sdl); ////////////////////////////////////////////////////////
 	SDL_DestroyWindow(i_sdl->w);
 	SDL_Quit();

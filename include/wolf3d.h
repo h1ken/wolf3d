@@ -6,7 +6,7 @@
 /*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 14:37:11 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/02/28 16:36:59 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/02/29 17:24:08 by cstripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct	s_vec4f
 typedef struct	s_unit
 {
 	t_vec3i		pos;
-	float			view_x;
+	float		view_x;
 	int			view_y;
 	t_vec3f		move;
 	char		flags;
