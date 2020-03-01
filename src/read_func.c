@@ -6,7 +6,7 @@
 /*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 16:02:33 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/02/29 18:36:44 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/03/01 16:48:02 by cstripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ static void	get_map_w_h(t_wolf3d *wolf, char *s)
 {
 	wolf->map->w = ft_atoi(s);
 	wolf->map->h = ft_atoi(ft_strchr(s, ' '));
-	if (wolf->map->w == 0 || wolf->map->h  == 0)
+	if (wolf->map->w == 0 || wolf->map->h == 0)
 		terminate("Check your map (map dimensions)");
+	create_grid(wolf);
 }
 
 static void	get_player_pos(t_wolf3d *wolf, char *s)
@@ -51,6 +52,7 @@ int			read_map(char *f_name, t_wolf3d *wolf)
 		}
 		free(s);
 	}
+	print_map(wolf);
 	if (got == -1)
 		terminate("Read error");
 	return (0);

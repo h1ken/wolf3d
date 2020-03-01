@@ -6,7 +6,7 @@
 /*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 10:57:51 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/02/28 15:27:56 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/03/01 16:40:28 by cstripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void		put_pixel_to_surf(int x, int y, SDL_Surface *trgt,
 {
 	uint32_t *tmp;
 
-    if (x >= 0 && y >= 0 && x < trgt->w && y < trgt->h)
-    {
-        tmp = (uint32_t *)trgt->pixels;
-        tmp[x + y * trgt->w] = color;
-    }
+	if (x >= 0 && y >= 0 && x < trgt->w && y < trgt->h)
+	{
+		tmp = (uint32_t *)trgt->pixels;
+		tmp[x + y * trgt->w] = color;
+	}
 }
 
 SDL_Surface	*create_surface(int w, int h)

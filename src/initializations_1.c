@@ -6,7 +6,7 @@
 /*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:15:16 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/02/29 18:39:57 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/03/01 16:37:27 by cstripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,22 @@ int			create_window(t_sdl_info *i_sdl)
 	return (0);
 }
 
-int			create_grid()
+int			create_grid(t_wolf3d *wolf)
 {
+	int i;
+
+	wolf->map->grid = (uint32_t **)ft_memalloc(sizeof(*(wolf->map->grid))
+												* wolf->map->h);
+	if (!wolf->map->grid)
+		terminate("Grid creation error, lines array");
+	i = 0;
+	while (i < wolf->map->h)
+	{
+		wolf->map->grid[i] = (uint32_t *)ft_memalloc(sizeof(**(wolf->map->grid))
+														* wolf->map->w);
+		if (!wolf->map->grid[i])
+			terminate("Grid creation error, lines");
+		i++;
+	}
+	return (0);
 }

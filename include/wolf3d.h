@@ -6,7 +6,7 @@
 /*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 14:37:11 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/02/29 17:24:08 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/03/01 16:46:45 by cstripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <stdint.h>
 # include <errno.h>
-# include <SDL.h>
+# include "SDL/SDL.h"
 # include "libft.h"
 # include "wolf3d_defines.h"
 
@@ -44,7 +44,7 @@ typedef struct	s_vec4f
 
 typedef struct	s_unit
 {
-	t_vec3i		pos;
+	t_vec3f		pos;
 	float		view_x;
 	int			view_y;
 	t_vec3f		move;
@@ -82,5 +82,7 @@ int				key_press_handle(SDL_KeyboardEvent e, t_wolf3d *wolf);
 int				key_up_handle(SDL_KeyboardEvent e, t_wolf3d *wolf);
 int				read_map(char *f_name, t_wolf3d *wolf);
 int				create_window(t_sdl_info *i_sdl);
+int				create_grid(t_wolf3d *wolf);
+void			print_map(t_wolf3d *wolf);
 SDL_Surface		*create_surface(int w, int h);
 #endif
