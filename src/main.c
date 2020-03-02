@@ -17,6 +17,8 @@ int	main(int ac, char **av)
 	t_wolf3d	*wolf;
 	t_sdl_info	*i_sdl;
 
+	if (ac != 2)
+		terminate("Usage error");
 	init(&wolf, &i_sdl);
 	create_window(i_sdl);
 	read_map(av[1], wolf);

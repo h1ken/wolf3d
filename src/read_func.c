@@ -29,14 +29,32 @@ static void	get_player_pos(t_wolf3d *wolf, char *s)
 		terminate("Check your map (player pos)");
 }
 
+static void	get_map_line(t_wolf3d *wolf, char *s, int *i)
+{
+	int x;
+
+	if (*i == wolf->map->h)
+		terminate("Check your map (more strings)");
+	if (ft_strlen(s) != wolf->map->w)
+		terminate("Check your map (different length string)");
+	x = 0;
+	while (x < wolf->map->w)
+	{
+		wolf->map->grid[*i][x] = s[x] == ' ' ? 0 : 1;
+		x++;
+	}
+	(*i)++;
+}
+
 int			read_map(char *f_name, t_wolf3d *wolf)
 {
-	t_list	*lst;
 	char	*s;
 	int		got;
+	int		i;
 	int		fd;
 
 	errno = 0;
+	i = 0;
 	if ((fd = open(f_name, O_RDONLY)) == -1)
 		terminate("An error occured while reading");
 	while ((got = get_next_line(fd, &s)) == 1)
@@ -46,12 +64,11 @@ int			read_map(char *f_name, t_wolf3d *wolf)
 		else if (wolf->player->pos.x == -1)
 			get_player_pos(wolf, s);
 		else
-		{
-			if (ft_strlen(s) != wolf->map->w)
-				terminate("Check your map (different length string)");
-		}
+			get_map_line(wolf, s, &i);
 		free(s);
 	}
+	if (i != wolf->map->h)
+		terminate("Check your map (less strings)");
 	print_map(wolf);
 	if (got == -1)
 		terminate("Read error");
