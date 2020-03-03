@@ -13,7 +13,7 @@
 #include "wolf3d.h"
 #include <fcntl.h>
 
-static void	get_map_w_h(t_wolf3d *wolf, char *s)
+static void		get_map_w_h(t_wolf3d *wolf, char *s)
 {
 	wolf->map->w = ft_atoi(s);
 	wolf->map->h = ft_atoi(ft_strchr(s, ' '));
@@ -22,14 +22,25 @@ static void	get_map_w_h(t_wolf3d *wolf, char *s)
 	create_grid(wolf);
 }
 
-static void	get_player_pos(t_wolf3d *wolf, char *s)
+static void		get_player_pos(t_wolf3d *wolf, char *s)
 {
 	if ((wolf->player->pos.x = ft_atoi(s)) == 0 ||
 			(wolf->player->pos.y = ft_atoi(ft_strchr(s, ' ') + 1)) == 0)
 		terminate("Check your map (player pos)");
 }
 
-static void	get_map_line(t_wolf3d *wolf, char *s, int *i)
+static uint32_t	parse_char(char c)
+{
+	if (!ft_strchr(VALID_MAP_SYMBOLS, c))
+		terminate("Non valid symbols in map file");
+	if (c == 'w')
+		return (1);
+	if (c == 'c')
+		return (2);
+	return (0);
+}
+
+static void		get_map_line(t_wolf3d *wolf, char *s, int *i)
 {
 	int x;
 
@@ -40,13 +51,13 @@ static void	get_map_line(t_wolf3d *wolf, char *s, int *i)
 	x = 0;
 	while (x < wolf->map->w)
 	{
-		wolf->map->grid[*i][x] = s[x] == ' ' ? 0 : 1;
+		wolf->map->grid[*i][x] = parse_char(s[x]);
 		x++;
 	}
 	(*i)++;
 }
 
-int			read_map(char *f_name, t_wolf3d *wolf)
+int				read_map(char *f_name, t_wolf3d *wolf)
 {
 	char	*s;
 	int		got;

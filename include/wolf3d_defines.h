@@ -24,4 +24,6 @@
 # define G_MASK 0x0000ff00
 # define B_MASK 0x000000ff
 
+# define VALID_MAP_SYMBOLS " cw"
+
 #endif
