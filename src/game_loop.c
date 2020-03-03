@@ -12,25 +12,31 @@
 
 #include "wolf3d.h"
 
-void	loop(t_wolf3d *wolf, t_sdl_info *i_sdl)
+static int	check_events(t_wolf3d *wolf, t_sdl_info *i_sdl)
+{
+	SDL_Event	e;
+
+		while (SDL_PollEvent(&e) != 0)
+		{
+			if (e.type == SDL_QUIT)
+				return (0);
+			else if (e.type == SDL_KEYDOWN)
+				return (key_press_handle(e.key, wolf));
+			else if (e.type == SDL_KEYUP)
+				return (key_up_handle(e.key, wolf));
+		}
+}
+
+void		loop(t_wolf3d *wolf, t_sdl_info *i_sdl)
 {
 	int			x;
-	SDL_Event	e;
 
 	wolf->w_surf = SDL_GetWindowSurface(i_sdl->w);
 	x = 1;
 	SDL_UpdateWindowSurface(i_sdl->w);
 	while (x)
 	{
-		while (SDL_PollEvent(&e) != 0)
-		{
-			if (e.type == SDL_QUIT)
-				x = 0;
-			else if (e.type == SDL_KEYDOWN)
-				x = key_press_handle(e.key, wolf);
-			else if (e.type == SDL_KEYUP)
-				x = key_up_handle(e.key, wolf);
-			SDL_UpdateWindowSurface(i_sdl->w);
-		}
+		x = check_events(wolf, i_sdl);
+		SDL_UpdateWindowSurface(i_sdl->w);
 	}
 }
