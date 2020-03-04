@@ -31,13 +31,10 @@ static int	check_events(t_wolf3d *wolf, t_sdl_info *i_sdl)
 void		loop(t_wolf3d *wolf, t_sdl_info *i_sdl)
 {
 	int	x;
-	float	dirX, dirY;
 
 	wolf->w_surf = SDL_GetWindowSurface(i_sdl->w);
 	x = 1;
 	SDL_UpdateWindowSurface(i_sdl->w);
-	dirX = -1;
-	dirY = 0;
 	while (x)
 	{
 		x = check_events(wolf, i_sdl);
