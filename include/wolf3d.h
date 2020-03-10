@@ -34,6 +34,13 @@ typedef struct	s_vec3f
 	float		z;
 }				t_vec3f;
 
+typedef struct	s_vec3d
+{
+	double		x;
+	double		y;
+	double		z;
+}				t_vec3d;
+
 typedef struct	s_vec4f
 {
 	float		x;
@@ -41,6 +48,14 @@ typedef struct	s_vec4f
 	float		z;
 	float		w;
 }				t_vec4f;
+
+typedef struct	s_vec4d
+{
+	double		x;
+	double		y;
+	double		z;
+	double		w;
+}				t_vec4d;
 
 typedef struct	s_unit
 {

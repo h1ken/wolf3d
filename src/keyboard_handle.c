@@ -22,6 +22,8 @@ int	key_press_handle(SDL_KeyboardEvent e, t_wolf3d *wolf)
 	{
 		put_pixel_to_surf(10, 10 + i++, wolf->w_surf, 0x00ff0000);
 	}
+	if (e.keysym.sym == SDLK_2)
+		wolf->player->pos.x += 1.0;
 	return (1);
 }
 

@@ -19,6 +19,7 @@ void	print_map(t_wolf3d *wolf)
 	int j;
 
 	i = -1;
+	printf("W: %d\t H: %d\n", wolf->map->w, wolf->map->h);
 	while (++i < wolf->map->h)
 	{
 		j = -1;
