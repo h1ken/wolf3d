@@ -6,7 +6,7 @@
 /*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 14:37:11 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/03/11 18:00:18 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/03/11 21:25:07 by cstripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,14 @@ typedef struct	s_map
 	SDL_Surface	*m_surf;
 }				t_map;
 
-typedef struct	s_camera
+typedef struct	s_ray
 {
-	t_vec3d		plane;
-}				t_camera;
+	t_vec3d		dir;
+	t_vec3d		delta_dist;
+	t_vec3d		side_dist;
+	t_vec3i		step;
+	int			side;
+}				t_ray;
 
 typedef struct	s_wolf3d
 {

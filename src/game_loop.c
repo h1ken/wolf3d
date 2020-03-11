@@ -6,7 +6,7 @@
 /*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:20:18 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/03/11 17:59:54 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/03/11 21:45:16 by cstripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,72 @@ static int	check_events(t_wolf3d *wolf, t_sdl_info *i_sdl)
 	return (1);
 }
 
-static t_vec3d	get_dir_ray(t_wolf3d *wolf, double cameraX)
+static t_ray	get_dir_ray(t_wolf3d *wolf, double cameraX)
 {
-	t_vec3d	res;
+	t_ray	res;
 
-	res.x = wolf->player->view.x + wolf->cam.x * cameraX;
-	res.y = wolf->player->view.y + wolf->cam.y * cameraX;
+	res.dir.x = wolf->player->view.x + wolf->cam.x * cameraX;
+	res.dir.y = wolf->player->view.y + wolf->cam.y * cameraX;
+	res.delta_dist.x = fabs(1 / res.dir.x);
+	res.delta_dist.y = fabs(1 / res.dir.y);
 	return (res);
+}
+
+static void		expand_ray(t_wolf3d *wolf, t_ray *dr, t_vec3i *cell,
+							t_vec3i step)
+{
+	int	hit;
+
+	hit = 0;
+	while (hit == 0)
+	{
+		if (dr->side_dist.x < dr->side_dist.y)
+		{
+			dr->side_dist.x += dr->delta_dist.x;
+			cell->x += step.x;
+			dr->side = step.x > 0 ? 0 : 1;
+		}
+		else
+		{
+			dr->side_dist.y += dr->delta_dist.y;
+			cell->y += step.y;
+			dr->side = step.y > 0 ? 2 : 3;
+		}
+		if (wolf->map->grid[cell->y][cell->x] > 0)
+			hit = 1;
+	}
+}
+
+static double	perform_dda(t_wolf3d *wolf, t_ray *dir_ray, t_vec3i *cell)
+{
+	double	wall_dist_perp;
+	t_vec3i	step;
+
+	step.x = dir_ray->dir.x < 0 ? -1 : 1;
+	step.y = dir_ray->dir.y < 0 ? -1 : 1;
+	dir_ray->side_dist.x = dir_ray->delta_dist.x * (dir_ray->dir.x < 0 ?
+										(wolf->player->pos.x - cell->x) :
+										(cell->x + 1.0 - wolf->player->pos.x));
+	dir_ray->side_dist.y = dir_ray->delta_dist.y * (dir_ray->dir.y < 0 ?
+										(wolf->player->pos.y - cell->y) :
+										(cell->y + 1.0 - wolf->player->pos.y));
+	expand_ray(wolf, dir_ray, cell, step);
+	if (dir_ray->side <= 1)
+		wall_dist_perp = (cell->x - wolf->player->pos.x + (1 - step.x) / 2)
+							/ dir_ray->dir.x;
+	else
+		wall_dist_perp = (cell->y - wolf->player->pos.y + (1 - step.y) / 2)
+							/ dir_ray->dir.y;
+	return (wall_dist_perp);
 }
 
 void		test_raycast(t_wolf3d *wolf, t_sdl_info *isdl)
 {
-	t_vec3d dir_ray;
-	t_vec3i cell;
-	int event;
-	int x;
+	t_ray	dir_ray;
+	t_vec3i	cell;
+	double	wall_dist_perp;
+	int		event;
+	int		x;
 
 	event = 1;
 	while (event)
@@ -54,79 +105,9 @@ void		test_raycast(t_wolf3d *wolf, t_sdl_info *isdl)
 		{
 			dir_ray = get_dir_ray(wolf, 2 * x / (double)(WOLF_WINDOW_W) - 1);
 			cell = get_player_pos_integer(wolf);
-			double sideDistX;
-			double sideDistY;
-			double deltaDistX = fabs(1 / dir_ray.x);
-			double deltaDistY = fabs(1 / dir_ray.y);
-			double WallDistPerpen;
-			int stepX;
-			int stepY;
-			int hit = 0;
-			int side;
-			if (dir_ray.x < 0)
-			{
-				stepX = -1;
-				sideDistX = (wolf->player->pos.x - cell.x) * deltaDistX;
-			}
-			else
-			{
-				stepX = 1;
-				sideDistX = (cell.x + 1.0 - wolf->player->pos.x) * deltaDistX;
-			}
-			if (dir_ray.y < 0)
-			{
-				stepY = -1;
-				sideDistY = (wolf->player->pos.y - cell.y) * deltaDistY;
-			}
-			else
-			{
-				stepY = 1;
-				sideDistY = (cell.y + 1.0 - wolf->player->pos.y) * deltaDistY;
-			}
-			while (hit == 0)
-			{
-				if (sideDistX < sideDistY)
-				{
-					sideDistX += deltaDistX;
-					cell.x += stepX;
-					side = 0;
-				}
-				else
-				{
-					sideDistY += deltaDistY;
-					cell.y += stepY;
-					side = 1;
-				}
-				if (wolf->map->grid[cell.y][cell.x] > 0)
-					hit = 1;
-			}
-			if (side == 0)
-				WallDistPerpen = (cell.x - wolf->player->pos.x + (1 - stepX) / 2) / dir_ray.x;
-			else
-				WallDistPerpen = (cell.y - wolf->player->pos.y + (1 - stepY) / 2) / dir_ray.y;
-			int lineHeight = (int)(WOLF_WINDOW_H / WallDistPerpen);
-			int drawStart = (-lineHeight >> 1) + (WOLF_WINDOW_H >> 1);
-			if (drawStart < 0)
-				drawStart = 0;
-			int drawEnd = (lineHeight >> 1) + (WOLF_WINDOW_H >> 1);
-			if (drawEnd >= WOLF_WINDOW_H)
-				drawEnd = WOLF_WINDOW_H - 1;
-			int color;
-			if (wolf->map->grid[cell.y][cell.x] == 1)
-				color = 0x00ff0000;
-			else if (wolf->map->grid[cell.y][cell.x] == 2)
-				color = 0x000000ff;
-			else
-				color = 0x00000000;
-			if (side == 1)
-				color >>= 1;
-			int tmp;
-			tmp = 0;
-			while (drawStart + tmp < drawEnd)
-			{
-				put_pixel_to_surf(x, drawStart + tmp, wolf->w_surf, color);
-				tmp++;
-			}
+			wall_dist_perp = perform_dda(wolf, &dir_ray, &cell);
+			cell.z = x;
+			draw_wall(wolf, cell, wall_dist_perp, dir_ray.side);
 		}
 		SDL_UpdateWindowSurface(isdl->w);
 		event = check_events(wolf, isdl);

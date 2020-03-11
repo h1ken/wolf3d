@@ -6,7 +6,7 @@
 #    By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/16 12:59:52 by cstripeb          #+#    #+#              #
-#    Updated: 2020/03/01 16:48:23 by cstripeb         ###   ########.fr        #
+#    Updated: 2020/03/11 20:21:17 by cstripeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ OBJ_DIR = ./objs/
 
 F_SRCS = main.c initializations_1.c game_loop.c draw_functions.c \
 		 keyboard_handle.c read_func.c exit_and_errors.c \
-		 utils_1.c
+		 utils_1.c black_rock_shooter.c
 SRCS = $(addprefix $(SRC_DIR), $(F_SRCS))
 OBJS = $(addprefix $(OBJ_DIR), $(F_SRCS:.c=.o))
 
