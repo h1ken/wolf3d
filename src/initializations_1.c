@@ -6,7 +6,7 @@
 /*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:15:16 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/03/01 16:37:27 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/03/11 17:26:57 by cstripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ static int	init_wolf3d(t_wolf3d **wolf)
 		terminate("t_unit malloc (player)");
 	(*wolf)->player->pos.x = -1;
 	(*wolf)->player->pos.y = -1;
+	(*wolf)->player->view.x = -1;
+	(*wolf)->player->view.y = 0;
+	(*wolf)->cam.x = 0;
+	(*wolf)->cam.y = 0.66;
 	return (0);
 }
 

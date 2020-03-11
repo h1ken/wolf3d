@@ -6,7 +6,7 @@
 /*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 10:59:39 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/03/01 16:39:35 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/03/11 17:47:34 by cstripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ int	key_press_handle(SDL_KeyboardEvent e, t_wolf3d *wolf)
 		put_pixel_to_surf(10, 10 + i++, wolf->w_surf, 0x00ff0000);
 	}
 	if (e.keysym.sym == SDLK_2)
-		wolf->player->pos.x += 1.0;
+		wolf->player->pos.x += 0.1;
+	if (e.keysym.sym == SDLK_3)
+		wolf->player->pos.y += 0.1;
 	return (1);
 }
 

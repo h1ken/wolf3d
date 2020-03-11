@@ -6,7 +6,7 @@
 /*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:20:18 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/02/28 13:44:54 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/03/11 17:59:54 by cstripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,22 @@ static int	check_events(t_wolf3d *wolf, t_sdl_info *i_sdl)
 	return (1);
 }
 
+static t_vec3d	get_dir_ray(t_wolf3d *wolf, double cameraX)
+{
+	t_vec3d	res;
+
+	res.x = wolf->player->view.x + wolf->cam.x * cameraX;
+	res.y = wolf->player->view.y + wolf->cam.y * cameraX;
+	return (res);
+}
 
 void		test_raycast(t_wolf3d *wolf, t_sdl_info *isdl)
 {
+	t_vec3d dir_ray;
+	t_vec3i cell;
 	int event;
-	double dirX = -1;
-	double dirY = 0;
-	double planeX = 0;
-	double planeY = 0.66;
-	double time = 0;
-	double oldTime = 0;
 	int x;
 
-
-	double distancetoplayer = (double)240 / tan(30 * M_PI / (double)180);
 	event = 1;
 	while (event)
 	{
@@ -50,72 +52,69 @@ void		test_raycast(t_wolf3d *wolf, t_sdl_info *isdl)
 		SDL_FillRect(wolf->w_surf, NULL, 0x00000000);
 		while (++x < WOLF_WINDOW_W)
 		{
-			double cameraX = 2 * x / (double)(WOLF_WINDOW_W) - 1;
-			double rayDirX = dirX + planeX * cameraX;
-			double rayDirY = dirY + planeY * cameraX;
-			int mapX = (int)(wolf->player->pos.x);
-			int mapY = (int)(wolf->player->pos.y);
+			dir_ray = get_dir_ray(wolf, 2 * x / (double)(WOLF_WINDOW_W) - 1);
+			cell = get_player_pos_integer(wolf);
 			double sideDistX;
 			double sideDistY;
-			double deltaDistX = abs(1 / rayDirX);
-			double deltaDistY = abs(1 / rayDirY);
+			double deltaDistX = fabs(1 / dir_ray.x);
+			double deltaDistY = fabs(1 / dir_ray.y);
 			double WallDistPerpen;
 			int stepX;
 			int stepY;
 			int hit = 0;
 			int side;
-			if (rayDirX < 0)
+			if (dir_ray.x < 0)
 			{
 				stepX = -1;
-				sideDistX = (wolf->player->pos.x - mapX) * deltaDistX;
+				sideDistX = (wolf->player->pos.x - cell.x) * deltaDistX;
 			}
 			else
 			{
 				stepX = 1;
-				sideDistX = (mapX + 1.0 - wolf->player->pos.x) * deltaDistX;
+				sideDistX = (cell.x + 1.0 - wolf->player->pos.x) * deltaDistX;
 			}
-			if (rayDirY < 0)
+			if (dir_ray.y < 0)
 			{
 				stepY = -1;
-				sideDistY = (wolf->player->pos.y - mapY) * deltaDistY;
+				sideDistY = (wolf->player->pos.y - cell.y) * deltaDistY;
 			}
 			else
 			{
 				stepY = 1;
-				sideDistY = (mapY + 1.0 - wolf->player->pos.y) * deltaDistY;
+				sideDistY = (cell.y + 1.0 - wolf->player->pos.y) * deltaDistY;
 			}
 			while (hit == 0)
 			{
 				if (sideDistX < sideDistY)
 				{
 					sideDistX += deltaDistX;
-					mapX += stepX;
+					cell.x += stepX;
 					side = 0;
 				}
 				else
 				{
 					sideDistY += deltaDistY;
-					mapY += stepY;
+					cell.y += stepY;
 					side = 1;
 				}
-				if (wolf->map->grid[mapY][mapX] > 0)
+				if (wolf->map->grid[cell.y][cell.x] > 0)
 					hit = 1;
 			}
 			if (side == 0)
-				WallDistPerpen = (mapX - wolf->player->pos.x + (1 - stepX) / 2) / rayDirX;
+				WallDistPerpen = (cell.x - wolf->player->pos.x + (1 - stepX) / 2) / dir_ray.x;
 			else
-				WallDistPerpen = (mapY - wolf->player->pos.y + (1 - stepY) / 2) / rayDirY;
+				WallDistPerpen = (cell.y - wolf->player->pos.y + (1 - stepY) / 2) / dir_ray.y;
 			int lineHeight = (int)(WOLF_WINDOW_H / WallDistPerpen);
-			int drawStart = -lineHeight / 2 + WOLF_WINDOW_H / 2;
+			int drawStart = (-lineHeight >> 1) + (WOLF_WINDOW_H >> 1);
 			if (drawStart < 0)
 				drawStart = 0;
-			int drawEnd = lineHeight / 2 + WOLF_WINDOW_H / 2;
+			int drawEnd = (lineHeight >> 1) + (WOLF_WINDOW_H >> 1);
 			if (drawEnd >= WOLF_WINDOW_H)
 				drawEnd = WOLF_WINDOW_H - 1;
 			int color;
-			if (wolf->map->grid[mapY][mapX] == 1)
+			if (wolf->map->grid[cell.y][cell.x] == 1)
 				color = 0x00ff0000;
-			else if (wolf->map->grid[mapY][mapX] == 2)
+			else if (wolf->map->grid[cell.y][cell.x] == 2)
 				color = 0x000000ff;
 			else
 				color = 0x00000000;

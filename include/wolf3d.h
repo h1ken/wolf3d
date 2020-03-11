@@ -6,7 +6,7 @@
 /*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 14:37:11 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/03/01 16:46:45 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/03/11 18:00:18 by cstripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,9 @@ typedef struct	s_vec4d
 
 typedef struct	s_unit
 {
-	t_vec3f		pos;
-	float		view_x;
-	int			view_y;
-	t_vec3f		move;
+	t_vec3d		pos;
+	t_vec3d		view;
+	t_vec3d		move;
 	char		flags;
 }				t_unit;
 
@@ -81,14 +80,21 @@ typedef struct	s_map
 	SDL_Surface	*m_surf;
 }				t_map;
 
+typedef struct	s_camera
+{
+	t_vec3d		plane;
+}				t_camera;
+
 typedef struct	s_wolf3d
 {
 	t_unit		*player;
+	t_vec3d		cam;
 	SDL_Surface	*w_surf;
 	t_map		*map;
 }				t_wolf3d;
 
 int				init(t_wolf3d **wolf, t_sdl_info **i_sdl);
+t_vec3i			get_player_pos_integer(t_wolf3d *wolf);
 void			terminate(char *msg);
 void			loop(t_wolf3d *wolf, t_sdl_info *i_sdl);
 void			put_pixel_to_surf(int x, int y, SDL_Surface *trgt,
