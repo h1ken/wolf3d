@@ -6,7 +6,7 @@
 /*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 10:57:51 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/03/14 10:13:10 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/03/14 12:26:59 by cstripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static int	pick_color(t_wolf3d *wolf, t_vec3i cell, int side)
 	else if (wolf->map->grid[cell.y][cell.x] == 2)
 		color = 0x0000007f;
 	if (side == 0)
-		color = color * 2;
+		color = 0x0023aa23;
 	else if (side == 1)
-		color = color | 0x00ff0000;
+		color = color | 0x00007f00;
 	else if (side == 2)
 		color = color;
 	else if (side == 3)

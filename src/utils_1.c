@@ -6,7 +6,7 @@
 /*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/01 16:43:16 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/03/14 12:14:59 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/03/14 12:46:54 by cstripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,20 @@ void	unit_move(t_wolf3d *wolf, t_unit *unit)
 {
 	if (unit->flags & 1)
 	{
-		if (wolf->map->grid[(int)(unit->pos.y)][(int)(unit->pos.x + unit->view.x * unit->speed)] == 0)
+		if (wolf->map->grid[(int)(unit->pos.y)]	[(int)(unit->pos.x
+							+ unit->view.x * unit->speed)] == 0)
 			unit->pos.x += unit->view.x * unit->speed;
-		if (wolf->map->grid[(int)(unit->pos.y + unit->view.y * unit->speed)][(int)(unit->pos.x)] == 0)
+		if (wolf->map->grid[(int)(unit->pos.y + unit->view.y
+							* unit->speed)][(int)(unit->pos.x)] == 0)
 			unit->pos.y += unit->view.y * unit->speed;
-		printf("x: %f y: %f\n", unit->pos.x, unit->pos.y);
-		print_map(wolf);
 	}
 	else if (unit->flags & (1 << 1))
 	{
-		if (wolf->map->grid[(int)(unit->pos.y)][(int)(unit->pos.x - unit->view.x * unit->speed)] == 0)
+		if (wolf->map->grid[(int)(unit->pos.y)][(int)(unit->pos.x
+							- unit->view.x * unit->speed)] == 0)
 			unit->pos.x -= unit->view.x * unit->speed;
-		if (wolf->map->grid[(int)(unit->pos.y - unit->view.y * unit->speed)][(int)(unit->pos.x)] == 0)
+		if (wolf->map->grid[(int)(unit->pos.y - unit->view.y
+							* unit->speed)][(int)(unit->pos.x)] == 0)
 			unit->pos.y -= unit->view.y * unit->speed;
 	}
 }

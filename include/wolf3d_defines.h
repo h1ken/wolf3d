@@ -6,7 +6,7 @@
 /*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 11:37:17 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/02/28 16:08:26 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/03/14 12:57:39 by cstripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,11 @@
 # define B_MASK 0x000000ff
 
 # define VALID_MAP_SYMBOLS " cw"
+
+# define GO_FORWARD SDLK_w
+# define GO_BACKWARD SDLK_s
+# define TURN_LEFT SDLK_a
+# define TURN_RIGHT SDLK_d
+# define EXIT_KEY SDLK_ESCAPE
 
 #endif

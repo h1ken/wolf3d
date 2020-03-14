@@ -6,7 +6,7 @@
 /*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:20:18 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/03/14 10:44:20 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/03/14 13:04:19 by cstripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void			loop(t_wolf3d *wolf, t_sdl_info *isdl)
 		SDL_FillRect(wolf->w_surf, NULL, 0x00000000);
 		while (++x < WOLF_WINDOW_W)
 		{
-			dir_ray = get_dir_ray(wolf, 2 * x / (double)(WOLF_WINDOW_W) - 1);
+			dir_ray = get_dir_ray(wolf, (x << 1) / (double)(WOLF_WINDOW_W) - 1);
 			cell = get_player_pos_integer(wolf);
 			wall_dist_perp = perform_dda(wolf, &dir_ray, &cell);
 			cell.z = x;
