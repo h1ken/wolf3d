@@ -6,7 +6,7 @@
 /*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 10:57:51 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/03/14 12:26:59 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/03/14 14:01:00 by cstripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ static int	pick_color(t_wolf3d *wolf, t_vec3i cell, int side)
 	if (side == 0)
 		color = 0x0023aa23;
 	else if (side == 1)
-		color = color | 0x00007f00;
+		color = 0x00a2aa77;
 	else if (side == 2)
-		color = color;
+		color = 0x00882288;
 	else if (side == 3)
-		color = color;
+		color = 0x001277aa;
 	return (color);
 }
 
