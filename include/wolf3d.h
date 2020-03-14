@@ -6,7 +6,7 @@
 /*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 14:37:11 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/03/11 21:25:07 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/03/14 11:57:45 by cstripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct	s_unit
 	t_vec3d		pos;
 	t_vec3d		view;
 	t_vec3d		move;
+	double		speed;
 	char		flags;
 }				t_unit;
 
@@ -92,19 +93,23 @@ typedef struct	s_ray
 typedef struct	s_wolf3d
 {
 	t_unit		*player;
+	t_vec3d		rot;
 	t_vec3d		cam;
 	SDL_Surface	*w_surf;
 	t_map		*map;
 }				t_wolf3d;
 
 int				init(t_wolf3d **wolf, t_sdl_info **i_sdl);
+void			draw_wall(t_wolf3d *wolf, t_vec3i cell, double wall_dist,
+							int side);
 t_vec3i			get_player_pos_integer(t_wolf3d *wolf);
 void			terminate(char *msg);
+void			unit_move(t_wolf3d *wolf, t_unit *unit);
 void			loop(t_wolf3d *wolf, t_sdl_info *i_sdl);
 void			put_pixel_to_surf(int x, int y, SDL_Surface *trgt,
 									unsigned int color);
-int				key_press_handle(SDL_KeyboardEvent e, t_wolf3d *wolf);
-int				key_up_handle(SDL_KeyboardEvent e, t_wolf3d *wolf);
+int				key_press_handle(SDL_Keycode e, t_wolf3d *wolf);
+int				key_up_handle(SDL_Keycode e, t_wolf3d *wolf);
 int				read_map(char *f_name, t_wolf3d *wolf);
 int				create_window(t_sdl_info *i_sdl);
 int				create_grid(t_wolf3d *wolf);

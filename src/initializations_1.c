@@ -6,7 +6,7 @@
 /*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:15:16 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/03/11 17:26:57 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/03/14 12:01:21 by cstripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static int	init_wolf3d(t_wolf3d **wolf)
 {
+	double turn_speed;
+
 	if (!(*wolf = (t_wolf3d *)ft_memalloc(sizeof(**wolf))))
 		terminate("t_wolf3d malloc");
 	if (!((*wolf)->map = (t_map *)ft_memalloc(sizeof(*((*wolf)->map)))))
@@ -24,10 +26,15 @@ static int	init_wolf3d(t_wolf3d **wolf)
 		terminate("t_unit malloc (player)");
 	(*wolf)->player->pos.x = -1;
 	(*wolf)->player->pos.y = -1;
-	(*wolf)->player->view.x = -1;
+	(*wolf)->player->view.x = 1;
 	(*wolf)->player->view.y = 0;
 	(*wolf)->cam.x = 0;
 	(*wolf)->cam.y = 0.66;
+	turn_speed = 2 * M_PI / 180.0;
+	(*wolf)->rot.x = cos(turn_speed);
+	(*wolf)->rot.y = sin(turn_speed);
+	(*wolf)->rot.z = sin(-turn_speed);
+	(*wolf)->player->speed = 0.10;
 	return (0);
 }
 

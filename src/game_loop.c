@@ -6,14 +6,14 @@
 /*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:20:18 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/03/11 21:45:16 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/03/14 10:44:20 by cstripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 #include <math.h>
 
-static int	check_events(t_wolf3d *wolf, t_sdl_info *i_sdl)
+static int		check_events(t_wolf3d *wolf, t_sdl_info *i_sdl)
 {
 	SDL_Event	e;
 
@@ -22,19 +22,19 @@ static int	check_events(t_wolf3d *wolf, t_sdl_info *i_sdl)
 		if (e.type == SDL_QUIT)
 			return (0);
 		else if (e.type == SDL_KEYDOWN)
-			return (key_press_handle(e.key, wolf));
+			return (key_press_handle(e.key.keysym.sym, wolf));
 		else if (e.type == SDL_KEYUP)
-			return (key_up_handle(e.key, wolf));
+			return (key_up_handle(e.key.keysym.sym, wolf));
 	}
 	return (1);
 }
 
-static t_ray	get_dir_ray(t_wolf3d *wolf, double cameraX)
+static t_ray	get_dir_ray(t_wolf3d *wolf, double camera_x)
 {
 	t_ray	res;
 
-	res.dir.x = wolf->player->view.x + wolf->cam.x * cameraX;
-	res.dir.y = wolf->player->view.y + wolf->cam.y * cameraX;
+	res.dir.x = wolf->player->view.x + wolf->cam.x * camera_x;
+	res.dir.y = wolf->player->view.y + wolf->cam.y * camera_x;
 	res.delta_dist.x = fabs(1 / res.dir.x);
 	res.delta_dist.y = fabs(1 / res.dir.y);
 	return (res);
@@ -88,7 +88,7 @@ static double	perform_dda(t_wolf3d *wolf, t_ray *dir_ray, t_vec3i *cell)
 	return (wall_dist_perp);
 }
 
-void		test_raycast(t_wolf3d *wolf, t_sdl_info *isdl)
+void			loop(t_wolf3d *wolf, t_sdl_info *isdl)
 {
 	t_ray	dir_ray;
 	t_vec3i	cell;
@@ -96,6 +96,8 @@ void		test_raycast(t_wolf3d *wolf, t_sdl_info *isdl)
 	int		event;
 	int		x;
 
+	wolf->w_surf = SDL_GetWindowSurface(isdl->w);
+	SDL_UpdateWindowSurface(isdl->w);
 	event = 1;
 	while (event)
 	{
@@ -112,20 +114,4 @@ void		test_raycast(t_wolf3d *wolf, t_sdl_info *isdl)
 		SDL_UpdateWindowSurface(isdl->w);
 		event = check_events(wolf, isdl);
 	}
-}
-
-
-void		loop(t_wolf3d *wolf, t_sdl_info *i_sdl)
-{
-	int	x;
-
-	wolf->w_surf = SDL_GetWindowSurface(i_sdl->w);
-	x = 1;
-	SDL_UpdateWindowSurface(i_sdl->w);
-	test_raycast(wolf, i_sdl);
-	//while (x)
-	//{
-	//	x = check_events(wolf, i_sdl);
-	//	SDL_UpdateWindowSurface(i_sdl->w);
-	//}
 }
