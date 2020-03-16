@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hdean <hdean@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 16:02:33 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/03/01 16:48:02 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/03/16 16:30:47 by hdean            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,6 @@ int				read_map(char *f_name, t_wolf3d *wolf)
 	print_map(wolf);
 	if (got == -1)
 		terminate("Read error");
+	close(fd);
 	return (0);
 }
