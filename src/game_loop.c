@@ -35,7 +35,7 @@ static t_ray	get_dir_ray(t_wolf3d *wolf, double camera_x)
 
 	res.dir.x = wolf->player->view.x + wolf->cam.x * camera_x;
 	res.dir.y = wolf->player->view.y + wolf->cam.y * camera_x;
-	res.delta_dist.x = fabs(1 / res.dir.x);
+	res.delta_dist.x = fabs(1 / res.dir.x); // what about division through zero
 	res.delta_dist.y = fabs(1 / res.dir.y);
 	return (res);
 }
@@ -108,8 +108,9 @@ void			loop(t_wolf3d *wolf, t_sdl_info *isdl)
 			dir_ray = get_dir_ray(wolf, (x << 1) / (double)(WOLF_WINDOW_W) - 1);
 			cell = get_player_pos_integer(wolf);
 			wall_dist_perp = perform_dda(wolf, &dir_ray, &cell);
-			cell.z = x;
-			draw_wall(wolf, cell, wall_dist_perp, dir_ray.side);
+			cell.z = x; //for what?
+//			draw_wall(wolf, cell, wall_dist_perp, dir_ray.side);
+            draw_wall(wolf, cell, wall_dist_perp, &dir_ray);
 		}
 		SDL_UpdateWindowSurface(isdl->w);
 		event = check_events(wolf, isdl);

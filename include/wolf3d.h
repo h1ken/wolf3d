@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdean <hdean@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 14:37:11 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/03/16 20:33:44 by hdean            ###   ########.fr       */
+/*   Updated: 2020/03/14 11:57:45 by cstripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,20 +90,30 @@ typedef struct	s_ray
 	int			side;
 }				t_ray;
 
+typedef struct  s_textures //mine
+{
+    int         flag;
+    SDL_Surface *tex[8];
+    int         x;
+    int         y;
+    double      step;
+    double      pos;
+}               t_textures;
+
 typedef struct	s_wolf3d
 {
-	
 	t_unit		*player;
 	t_vec3d		rot;
 	t_vec3d		cam;
 	SDL_Surface	*w_surf;
 	t_map		*map;
-	SDL_Surface	*floor;
+	t_textures  *textures; //mine
 }				t_wolf3d;
 
 int				init(t_wolf3d **wolf, t_sdl_info **i_sdl);
-void			draw_wall(t_wolf3d *wolf, t_vec3i cell, double wall_dist,
-							int side);
+//void			draw_wall(t_wolf3d *wolf, t_vec3i cell, double wall_dist,
+//							int side);
+void		draw_wall(t_wolf3d *wolf, t_vec3i cell, double wall_dist, t_ray *ray_dir);
 t_vec3i			get_player_pos_integer(t_wolf3d *wolf);
 void			terminate(char *msg);
 void			unit_move(t_wolf3d *wolf, t_unit *unit);
@@ -117,4 +127,7 @@ int				create_window(t_sdl_info *i_sdl);
 int				create_grid(t_wolf3d *wolf);
 void			print_map(t_wolf3d *wolf);
 SDL_Surface		*create_surface(int w, int h);
+
+/////////////////////////
+int             read_textures(t_wolf3d *wolf);
 #endif

@@ -37,6 +37,10 @@ wolf3d
 *.idb
 *.pdb
 
+.idea/
+CMakeLists.txt
+cmake-build-debug/
+
 # Kernel Module Compile Results
 *.mod*
 *.cmd

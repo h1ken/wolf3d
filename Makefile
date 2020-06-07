@@ -22,7 +22,7 @@ OBJ_DIR = ./objs/
 
 F_SRCS = main.c initializations_1.c game_loop.c draw_functions.c \
 		 keyboard_handle.c read_func.c exit_and_errors.c \
-		 utils_1.c black_rock_shooter.c
+		 utils_1.c black_rock_shooter.c textures.c
 SRCS = $(addprefix $(SRC_DIR), $(F_SRCS))
 OBJS = $(addprefix $(OBJ_DIR), $(F_SRCS:.c=.o))
 

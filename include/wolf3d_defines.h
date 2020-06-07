@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d_defines.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdean <hdean@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 11:37:17 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/03/16 16:24:15 by hdean            ###   ########.fr       */
+/*   Updated: 2020/03/14 12:57:39 by cstripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@
 # define TURN_LEFT SDLK_a
 # define TURN_RIGHT SDLK_d
 # define EXIT_KEY SDLK_ESCAPE
+# define TURN_TEXTURES SDLK_t
 
 #endif
