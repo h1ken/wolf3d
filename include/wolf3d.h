@@ -93,7 +93,11 @@ typedef struct	s_ray
 typedef struct  s_textures //mine
 {
     int         flag;
-    SDL_Surface *tex[8];
+    SDL_Surface *wall[15]; //check for actual quantity
+    SDL_Surface *door[3];
+    SDL_Surface *objects[5];
+    SDL_Surface *floor[2];
+    SDL_Surface *ceiling[2];
     int         x;
     int         y;
     double      step;
@@ -130,4 +134,5 @@ SDL_Surface		*create_surface(int w, int h);
 
 /////////////////////////
 int             read_textures(t_wolf3d *wolf);
+void            draw_floor_ceiling(t_wolf3d *wolf);
 #endif

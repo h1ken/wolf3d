@@ -43,7 +43,7 @@ int		key_press_handle(SDL_Keycode key, t_wolf3d *wolf)
 	if (key == TURN_LEFT || key == TURN_RIGHT)
 		rotate_kb(wolf, key);
 	if (key == TURN_TEXTURES)
-	    wolf->textures->flag ^= 1;
+	    wolf->textures->flag = ++(wolf->textures->flag) % 3;
 	unit_move(wolf, wolf->player);
 	return (1);
 }

@@ -61,3 +61,18 @@ void	unit_move(t_wolf3d *wolf, t_unit *unit)
 			unit->pos.y -= unit->view.y * unit->speed;
 	}
 }
+
+SDL_Surface	*create_surface(int w, int h)
+{
+    SDL_Surface *res;
+
+    res = SDL_CreateRGBSurface(0, w, h, 32, R_MASK, G_MASK, B_MASK, A_MASK);
+    if (!res)
+    {
+        ft_putendl("heh");
+        return (NULL);
+    }
+    SDL_SetSurfaceBlendMode(res, SDL_BLENDMODE_NONE);
+    ft_bzero(res->pixels, res->h * res->pitch);
+    return (res);
+}
