@@ -6,7 +6,7 @@
 /*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:20:18 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/08 16:56:35 by h1ken            ###   ########.fr       */
+/*   Updated: 2020/06/08 19:46:27 by h1ken            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,9 @@ void			loop(t_wolf3d *wolf, t_sdl_info *isdl)
 			cell = get_player_pos_integer(wolf);
 			wall_dist_perp = perform_dda(wolf, &dir_ray, &cell);
 			cell.z = x;
-            draw_wall(wolf, cell, wall_dist_perp, &dir_ray);
+			draw_wall(wolf, cell, wall_dist_perp, &dir_ray);
 		}
+		draw_weapon(isdl, wolf);
 		SDL_UpdateWindowSurface(isdl->w);
 		event = check_events(wolf, isdl);
 	}

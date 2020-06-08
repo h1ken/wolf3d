@@ -6,7 +6,7 @@
 /*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 14:37:11 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/08 18:08:32 by h1ken            ###   ########.fr       */
+/*   Updated: 2020/06/08 19:53:42 by h1ken            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ int				create_grid(t_wolf3d *wolf);
 void			print_map(t_wolf3d *wolf);
 SDL_Surface		*create_surface(int w, int h);
 void			ft_validator(t_wolf3d *wolf);
+void			draw_weapon(t_sdl_info *isdl, t_wolf3d *wolf);
 
 /////////////////////////
 int             read_textures(t_wolf3d *wolf);

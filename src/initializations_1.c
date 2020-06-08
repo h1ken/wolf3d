@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initializations_1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:15:16 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/03/14 12:01:21 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/06/08 20:03:49 by h1ken            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	init_wolf3d(t_wolf3d **wolf)
 	(*wolf)->rot.x = cos(turn_speed);
 	(*wolf)->rot.y = sin(turn_speed);
 	(*wolf)->rot.z = sin(-turn_speed);
-	(*wolf)->player->speed = 0.10;
+	(*wolf)->player->speed = 0.25;
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 10:59:39 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/08 18:43:10 by h1ken            ###   ########.fr       */
+/*   Updated: 2020/06/08 20:03:03 by h1ken            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		key_press_handle(SDL_Keycode key, t_wolf3d *wolf)
 	if (key == EXIT_KEY)
 		return (0);
 	if (key == SDLK_LSHIFT)
-		wolf->player->speed = 0.2;
+		wolf->player->speed = 0.5;
 	if (key == GO_FORWARD)
 		wolf->player->flags |= 1;
 	if (key == GO_BACKWARD)
@@ -53,7 +53,7 @@ int		key_up_handle(SDL_Keycode key, t_wolf3d *wolf)
 	if (key == SDLK_w)
 		wolf->player->flags ^= 1;
 	if (key == SDLK_LSHIFT)
-		wolf->player->speed = 0.1;
+		wolf->player->speed = 0.25;
 	if (key == SDLK_s)
 		wolf->player->flags ^= (1 << 1);
 	if (key == SDLK_a)
