@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard_handle.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 10:59:39 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/03/14 12:58:44 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/06/08 12:56:38 by h1ken            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		key_press_handle(SDL_Keycode key, t_wolf3d *wolf)
 	if (key == TURN_LEFT || key == TURN_RIGHT)
 		rotate_kb(wolf, key);
 	if (key == TURN_TEXTURES)
-	    wolf->textures->flag = ++(wolf->textures->flag) % 3;
+		wolf->textures->flag = ++(wolf->textures->flag) % 3;
 	unit_move(wolf, wolf->player);
 	return (1);
 }
