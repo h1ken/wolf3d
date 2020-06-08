@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:20:18 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/03/14 13:04:19 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/06/08 16:54:46 by h1ken            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,11 @@ static double	perform_dda(t_wolf3d *wolf, t_ray *dir_ray, t_vec3i *cell)
 	dir_ray->side_dist.x = dir_ray->delta_dist.x * (dir_ray->dir.x < 0 ?
 										(wolf->player->pos.x - cell->x) :
 										(cell->x + 1.0 - wolf->player->pos.x));
+	printf("dist: %f  ", dir_ray->side_dist.x);
 	dir_ray->side_dist.y = dir_ray->delta_dist.y * (dir_ray->dir.y < 0 ?
 										(wolf->player->pos.y - cell->y) :
 										(cell->y + 1.0 - wolf->player->pos.y));
+	printf("dist: %f\n", dir_ray->side_dist.y);
 	expand_ray(wolf, dir_ray, cell, step);
 	if (dir_ray->side <= 1)
 		wall_dist_perp = (cell->x - wolf->player->pos.x + (1 - step.x) / 2)
@@ -108,8 +110,7 @@ void			loop(t_wolf3d *wolf, t_sdl_info *isdl)
 			dir_ray = get_dir_ray(wolf, (x << 1) / (double)(WOLF_WINDOW_W) - 1);
 			cell = get_player_pos_integer(wolf);
 			wall_dist_perp = perform_dda(wolf, &dir_ray, &cell);
-			cell.z = x; //for what?
-//			draw_wall(wolf, cell, wall_dist_perp, dir_ray.side);
+			cell.z = x;
             draw_wall(wolf, cell, wall_dist_perp, &dir_ray);
 		}
 		SDL_UpdateWindowSurface(isdl->w);
