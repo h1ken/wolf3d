@@ -6,7 +6,7 @@
 /*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:15:16 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/08 20:03:49 by h1ken            ###   ########.fr       */
+/*   Updated: 2020/06/08 23:06:37 by h1ken            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ static int	init_wolf3d(t_wolf3d **wolf)
 	(*wolf)->player->pos.y = -1;
 	(*wolf)->player->view.x = 1;
 	(*wolf)->player->view.y = 0;
+	(*wolf)->player->pitch = 0;
 	(*wolf)->cam.x = 0;
 	(*wolf)->cam.y = 0.66;
-	turn_speed = 2 * M_PI / 180.0;
+	turn_speed = 3 * M_PI / 180.0;
 	(*wolf)->rot.x = cos(turn_speed);
 	(*wolf)->rot.y = sin(turn_speed);
 	(*wolf)->rot.z = sin(-turn_speed);

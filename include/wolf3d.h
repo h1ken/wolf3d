@@ -6,7 +6,7 @@
 /*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 14:37:11 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/08 19:53:42 by h1ken            ###   ########.fr       */
+/*   Updated: 2020/06/08 23:06:11 by h1ken            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct	s_unit
 	t_vec3d		pos;
 	t_vec3d		view;
 	t_vec3d		move;
+	int			pitch;
 	double		speed;
 	char		flags;
 }				t_unit;

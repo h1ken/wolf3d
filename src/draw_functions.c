@@ -6,7 +6,7 @@
 /*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 10:57:51 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/08 13:25:51 by h1ken            ###   ########.fr       */
+/*   Updated: 2020/06/08 23:04:13 by h1ken            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ void			draw_wall(t_wolf3d *wolf, t_vec3i cell, double wall_dist,
 	int color;
 
 	line_h = (int)(WOLF_WINDOW_H / wall_dist);
-	draw_start = (-line_h >> 1) + (WOLF_WINDOW_H >> 1);
-	draw_end = (line_h >> 1) + (WOLF_WINDOW_H >> 1);
+	draw_start = (-line_h >> 1) + (WOLF_WINDOW_H >> 1) + wolf->player->pitch;
+	draw_end = (line_h >> 1) + (WOLF_WINDOW_H >> 1) + wolf->player->pitch;
 	draw_start = draw_start < 0 ? 0 : draw_start;
 	if (draw_end >= WOLF_WINDOW_H)
 		draw_end = WOLF_WINDOW_H - 1;
