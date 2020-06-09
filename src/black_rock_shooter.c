@@ -6,7 +6,7 @@
 /*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 16:31:02 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/08 22:55:51 by h1ken            ###   ########.fr       */
+/*   Updated: 2020/06/09 18:23:54 by h1ken            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,25 @@ void    draw_weapon(t_sdl_info *isdl, t_wolf3d *wolf)
 	static int	x = 0;
 	int			i;
 	int			j;
+	int			*texture;
+	int color;
 
 	i = 0;
-	while (i < 20)
+	texture = (int *)wolf->textures->objects[5]->pixels;
+	while (i < 36)
 	{
-		j = 1;
-		while (j <= 40)
+		j = 0;
+		while (j <= 120)
 		{
-			put_pixel_to_surf(320 + i + 20 * x, 479 - j,
-				wolf->w_surf, 0x00000000);
+			color = *(texture + i + 36 * x + j * 338);
+			if ((color & 0x00FFFFFF) != 0)
+				put_pixel_to_surf(370 + i, 370 + j,
+									wolf->w_surf, color);
 			j++;
 		}
 		i++;
 		
 	}
 	j = SDL_GetTicks();
-	x = j / 250 % 4;
+	x = j / 150 % 9;
 }

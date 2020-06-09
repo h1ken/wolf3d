@@ -6,7 +6,7 @@
 /*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 14:37:11 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/08 23:06:11 by h1ken            ###   ########.fr       */
+/*   Updated: 2020/06/09 17:42:57 by h1ken            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdint.h>
 # include <errno.h>
 # include "SDL/SDL.h"
+# include "SDL/SDL_mixer.h"
 # include "libft.h"
 # include "wolf3d_defines.h"
 
@@ -96,7 +97,7 @@ typedef struct  s_textures //mine
     int         flag;
     SDL_Surface *wall[15]; //check for actual quantity
     SDL_Surface *door[3];
-    SDL_Surface *objects[5];
+    SDL_Surface *objects[6];
     SDL_Surface *floor[2];
     SDL_Surface *ceiling[2];
     int         x;

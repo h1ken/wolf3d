@@ -5,7 +5,7 @@ static SDL_Surface		*load_texture(char *path)
     SDL_Surface		*load_image;
     SDL_Surface		*texture;
 
-    if (!(load_image = SDL_LoadBMP(path)))
+	if (!(load_image = SDL_LoadBMP(path)))
         terminate("Can't load texture");
     texture = SDL_ConvertSurfaceFormat(load_image, SDL_PIXELFORMAT_BGRA32, 0);
     if (!texture)
@@ -30,6 +30,6 @@ int                     read_textures(t_wolf3d *wolf)
     wolf->textures->door[0] = load_texture("src/textures/door0.bmp");
     wolf->textures->floor[0] = load_texture("src/textures/floor0.bmp");
     wolf->textures->ceiling[0] = load_texture("src/textures/wall1.bmp");
-
+	wolf->textures->objects[5] = load_texture("src/textures/bmp_torch.bmp");
     return (0);
 }
