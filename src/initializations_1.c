@@ -6,7 +6,7 @@
 /*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:15:16 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/08 23:06:37 by h1ken            ###   ########.fr       */
+/*   Updated: 2020/06/10 16:40:02 by h1ken            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ static int	init_sdl_info(t_sdl_info **i_sdl)
 {
 	if (!(*i_sdl = (t_sdl_info *)ft_memalloc(sizeof(**i_sdl))))
 		terminate("i_sdl malloc");
-	if (SDL_Init(SDL_INIT_EVERYTHING))
+	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 		terminate("SDL_Init error");
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+		terminate("Mix_OpenAudio error");
 	return (0);
 }
 

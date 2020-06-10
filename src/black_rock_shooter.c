@@ -6,7 +6,7 @@
 /*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 16:31:02 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/10 16:14:56 by h1ken            ###   ########.fr       */
+/*   Updated: 2020/06/10 17:14:46 by h1ken            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,11 @@ void    draw_weapon(t_sdl_info *isdl, t_wolf3d *wolf)
 	}
 	j = SDL_GetTicks();
 	x = j / 150 % 9;
+}
+
+void	get_sound(t_wolf3d *wolf)
+{
+	if (!(wolf->music = Mix_LoadMUS("src/music/beat.wav")))
+		terminate("Error in loading music");
+	Mix_PlayMusic(wolf->music, -1);
 }

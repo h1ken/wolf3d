@@ -6,7 +6,7 @@
 #    By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/16 12:59:52 by cstripeb          #+#    #+#              #
-#    Updated: 2020/06/08 18:10:36 by h1ken            ###   ########.fr        #
+#    Updated: 2020/06/10 16:49:37 by h1ken            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,10 +43,10 @@ SDL_INC = $(addprefix $(INC_DIR), SDL/)
 INC += -I$(SDL_INC)
 ifeq ($(UNAME_OS),Darwin)
 	LNK += -F./lib/ -rpath ./lib/ -framework OpenGL -framework AppKit \
-		-framework SDL2
+		-framework SDL2 -framework SDL2_mixer
 endif
 ifeq ($(UNAME_OS),Linux)
-	LNK += -lSDL2
+	LNK += -lSDL2 -lSDL2_mixer
 endif
 
 .PHONY: all

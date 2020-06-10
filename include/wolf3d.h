@@ -6,7 +6,7 @@
 /*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 14:37:11 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/09 17:42:57 by h1ken            ###   ########.fr       */
+/*   Updated: 2020/06/10 17:02:57 by h1ken            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ typedef struct	s_wolf3d
 	SDL_Surface	*w_surf;
 	t_map		*map;
 	t_textures  *textures; //mine
+	Mix_Music	*music;
 }				t_wolf3d;
 
 int				init(t_wolf3d **wolf, t_sdl_info **i_sdl);
@@ -135,6 +136,7 @@ void			print_map(t_wolf3d *wolf);
 SDL_Surface		*create_surface(int w, int h);
 void			ft_validator(t_wolf3d *wolf);
 void			draw_weapon(t_sdl_info *isdl, t_wolf3d *wolf);
+void			get_sound(t_wolf3d *wolf);
 
 /////////////////////////
 int             read_textures(t_wolf3d *wolf);
