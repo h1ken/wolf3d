@@ -61,6 +61,7 @@ static int		pick_textures(t_wolf3d *wolf, t_vec3i cell, int side)
 		else if (wolf->map->grid[cell.y][cell.x] == 4)
 			texture = (int *)wolf->textures->door[0]->pixels;
 	}
+	if (wolf->map->grid[cell.y][cell.x] != 5 && wolf->map->grid[cell.y][cell.x] != 6)
 	color = *(texture + wolf->textures->x + CHUNK_SIZE * wolf->textures->y);
 	if (side == 1 || side == 2)
 		color = (color >> 1) & 8355711;

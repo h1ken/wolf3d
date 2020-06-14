@@ -30,6 +30,7 @@ int                     read_textures(t_wolf3d *wolf)
     wolf->textures->door[0] = load_texture("src/textures/door0.bmp");
     wolf->textures->floor[0] = load_texture("src/textures/floor0.bmp");
     wolf->textures->ceiling[0] = load_texture("src/textures/wall1.bmp");
-
+    wolf->textures->objects[0] = load_texture("src/textures/barrel.bmp");
+    wolf->textures->objects[1] = load_texture("src/textures/pillar.bmp");
     return (0);
 }

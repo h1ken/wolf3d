@@ -41,6 +41,10 @@ static uint32_t	parse_char(char c)
 	    return (3);
 	if (c == 'd')
 	    return (4);
+	if (c == 'b')
+		return (5);
+	if (c == 'p')
+		return (6);
 	return (0);
 }
 

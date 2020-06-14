@@ -90,6 +90,20 @@ typedef struct	s_ray
 	int			side;
 }				t_ray;
 
+typedef struct s_object
+{
+	double 		x;
+	double		y;
+	int			object;
+}				t_object;
+
+typedef struct s_sprite
+{
+	int			amount;
+	t_object 	obj[5];
+	double		zbuffer[WOLF_WINDOW_W];
+}				t_sprite;
+
 typedef struct  s_textures //mine
 {
     int         flag;
@@ -112,6 +126,7 @@ typedef struct	s_wolf3d
 	SDL_Surface	*w_surf;
 	t_map		*map;
 	t_textures  *textures; //mine
+	t_sprite 	*sprite;
 }				t_wolf3d;
 
 int				init(t_wolf3d **wolf, t_sdl_info **i_sdl);
@@ -135,4 +150,6 @@ SDL_Surface		*create_surface(int w, int h);
 /////////////////////////
 int             read_textures(t_wolf3d *wolf);
 void            draw_floor_ceiling(t_wolf3d *wolf);
+void			draw_sprites(t_wolf3d *wolf, t_ray *dir);
+void			read_sprites(t_wolf3d *wolf);
 #endif

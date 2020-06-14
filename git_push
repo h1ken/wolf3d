@@ -1,0 +1,4 @@
+#/bin/sh
+git add .
+git commit -mg
+git push wolf3d-ssh master

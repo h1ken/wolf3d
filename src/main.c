@@ -12,6 +12,16 @@
 
 #include "wolf3d.h"
 
+
+void print_sprites(t_sprite *s)
+{
+	printf("Num of sprites: %d\n", s->amount);
+	for (int i = 0; i < s->amount; i++)
+	{
+		printf("%d. (%.2f, %.2f) obj: %d\n", i, s->obj[i].x, s->obj[i].y, s->obj[i].object);
+	}
+}
+
 int	main(int ac, char **av)
 {
 	t_wolf3d	*wolf;
@@ -23,6 +33,8 @@ int	main(int ac, char **av)
 	create_window(i_sdl);
 	read_map(av[1], wolf);
 	read_textures(wolf);
+	read_sprites(wolf);
+//	print_sprites(wolf->sprite);
 	loop(wolf, i_sdl); ////////////////////////////////////////////////////////
 	SDL_DestroyWindow(i_sdl->w);
 	SDL_Quit();

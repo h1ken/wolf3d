@@ -24,7 +24,7 @@
 # define G_MASK 0x0000ff00
 # define B_MASK 0x000000ff
 
-# define VALID_MAP_SYMBOLS " cwad"
+# define VALID_MAP_SYMBOLS " cwadbp"
 
 # define GO_FORWARD SDLK_w
 # define GO_BACKWARD SDLK_s

@@ -96,6 +96,7 @@ void			loop(t_wolf3d *wolf, t_sdl_info *isdl)
 	int		event;
 	int		x;
 
+	print_map(wolf);
 	wolf->w_surf = SDL_GetWindowSurface(isdl->w);
 	SDL_UpdateWindowSurface(isdl->w);
 	event = 1;
@@ -110,7 +111,9 @@ void			loop(t_wolf3d *wolf, t_sdl_info *isdl)
 			wall_dist_perp = perform_dda(wolf, &dir_ray, &cell);
 			cell.z = x;
             draw_wall(wolf, cell, wall_dist_perp, &dir_ray);
+            wolf->sprite->zbuffer[x] = wall_dist_perp;
 		}
+		draw_sprites(wolf, &dir_ray);
 		SDL_UpdateWindowSurface(isdl->w);
 		event = check_events(wolf, isdl);
 	}
