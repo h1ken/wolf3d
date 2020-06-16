@@ -6,7 +6,7 @@
 /*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:20:18 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/09 06:51:09 by h1ken            ###   ########.fr       */
+/*   Updated: 2020/06/16 17:07:05 by h1ken            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int		check_events(t_wolf3d *wolf, t_sdl_info *i_sdl)
 	return (1);
 }
 
-static t_ray	get_dir_ray(t_wolf3d *wolf, double camera_x)
+t_ray	get_dir_ray(t_wolf3d *wolf, double camera_x)
 {
 	t_ray	res;
 
@@ -65,7 +65,7 @@ static void		expand_ray(t_wolf3d *wolf, t_ray *dr, t_vec3i *cell,
 	}
 }
 
-static double	perform_dda(t_wolf3d *wolf, t_ray *dir_ray, t_vec3i *cell)
+double	perform_dda(t_wolf3d *wolf, t_ray *dir_ray, t_vec3i *cell)
 {
 	double	wall_dist_perp;
 	t_vec3i	step;
@@ -90,29 +90,25 @@ static double	perform_dda(t_wolf3d *wolf, t_ray *dir_ray, t_vec3i *cell)
 
 void			loop(t_wolf3d *wolf, t_sdl_info *isdl)
 {
-	t_ray	dir_ray;
-	t_vec3i	cell;
-	double	wall_dist_perp;
 	int		event;
-	int		x;
-
+	
+	wolf->oldtime = SDL_GetTicks();
+	wolf->time = SDL_GetTicks();
+	wolf->ftime = 0;
 	wolf->w_surf = SDL_GetWindowSurface(isdl->w);
 	SDL_UpdateWindowSurface(isdl->w);
 	event = 1;
 	while (event)
 	{
-		x = -1;
-		draw_floor_ceiling(wolf);
-		while (++x < WOLF_WINDOW_W)
+		wolf->time = SDL_GetTicks();
+		wolf->ftime = wolf->time - wolf->oldtime;
+		if (wolf->ftime >= 1000.0 / 61.0)
 		{
-			dir_ray = get_dir_ray(wolf, (x << 1) / (double)(WOLF_WINDOW_W) - 1);
-			cell = get_player_pos_integer(wolf);
-			wall_dist_perp = perform_dda(wolf, &dir_ray, &cell);
-			cell.z = x;
-			draw_wall(wolf, cell, wall_dist_perp, &dir_ray);
+			do_raycasting_magic(wolf);
+			draw_weapon(isdl, wolf);
+			SDL_UpdateWindowSurface(isdl->w);
+			wolf->oldtime = wolf->time;
+			event = check_events(wolf, isdl);
 		}
-		draw_weapon(isdl, wolf);
-		SDL_UpdateWindowSurface(isdl->w);
-		event = check_events(wolf, isdl);
 	}
 }

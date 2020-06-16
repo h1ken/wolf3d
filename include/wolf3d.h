@@ -6,7 +6,7 @@
 /*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 14:37:11 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/10 17:02:57 by h1ken            ###   ########.fr       */
+/*   Updated: 2020/06/16 17:06:58 by h1ken            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,9 @@ typedef struct	s_wolf3d
 	t_map		*map;
 	t_textures  *textures; //mine
 	Mix_Music	*music;
+	double		time;
+	double		oldtime;
+	double		ftime;
 }				t_wolf3d;
 
 int				init(t_wolf3d **wolf, t_sdl_info **i_sdl);
@@ -137,6 +140,9 @@ SDL_Surface		*create_surface(int w, int h);
 void			ft_validator(t_wolf3d *wolf);
 void			draw_weapon(t_sdl_info *isdl, t_wolf3d *wolf);
 void			get_sound(t_wolf3d *wolf);
+void			do_raycasting_magic(t_wolf3d *wolf);
+t_ray			get_dir_ray(t_wolf3d *wolf, double camera_x);
+double			perform_dda(t_wolf3d *wolf, t_ray *dir_ray, t_vec3i *cell);
 
 /////////////////////////
 int             read_textures(t_wolf3d *wolf);
