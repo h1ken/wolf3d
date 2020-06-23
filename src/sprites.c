@@ -78,13 +78,14 @@ void	draw_sprites(t_wolf3d *wolf, t_ray *dir)
 	int draw_end_y;
 
 	i = 0;
+	printf("pos (%.2f, %.2f)\n", wolf->player->pos.x, wolf->player->pos.y);
 	while (i < wolf->sprite->amount)
 	{
 		sprite_order[i] = i;
-		sprite_dist[i] = (wolf->player->pos.x - wolf->sprite->obj[i].x) *
-				(wolf->player->pos.x - wolf->sprite->obj[i].x) +
-				(wolf->player->pos.y - wolf->sprite->obj[i].y) *
-				(wolf->player->pos.y - wolf->sprite->obj[i].y);
+		sprite_dist[i] = (wolf->cam.x - wolf->sprite->obj[i].x) *
+				(wolf->cam.x - wolf->sprite->obj[i].x) +
+				(wolf->cam.y - wolf->sprite->obj[i].y) *
+				(wolf->cam.y - wolf->sprite->obj[i].y);
 		i++;
 	}
 	sort_sprites(sprite_order, sprite_dist, wolf->sprite->amount);
@@ -92,16 +93,21 @@ void	draw_sprites(t_wolf3d *wolf, t_ray *dir)
 	while (i < wolf->sprite->amount)
 	{
 		printf("Object %d\n", sprite_order[i]);
-		sprite.x = wolf->sprite->obj[sprite_order[i]].x - wolf->player->pos.y;
-		sprite.y = wolf->sprite->obj[sprite_order[i]].y - wolf->player->pos.x;
+		sprite.x = wolf->sprite->obj[sprite_order[i]].x - wolf->cam.x;
+		sprite.y = wolf->sprite->obj[sprite_order[i]].y - wolf->cam.y;
+
+//		sprite.x = wolf->sprite->obj[sprite_order[i]].x;
+//		sprite.y = wolf->sprite->obj[sprite_order[i]].y;
+
 		printf("sprite position: (%.2f, %.2f)\n", sprite.x, sprite.y);
 
 		inv_det = 1.0 / (wolf->cam.x * dir->dir.y - dir->dir.x * wolf->cam.y);
-		printf("Inv det: %.2f\n", inv_det);
 
 		transf.x = inv_det * (dir->dir.y * sprite.x - dir->dir.x * sprite.y);
-		transf.y = inv_det * ((-wolf->cam.y) * sprite.x + wolf->cam.x * sprite.y);
-		printf("sprite position: (%.2f, %.2f)\n", transf.x, transf.y);
+		transf.y = inv_det * (-wolf->cam.y * sprite.x + wolf->cam.x * sprite.y);
+
+		printf("trans: (%.2f, %.2f)\n", transf.x, transf.y);
+
 
 		screen = (int)((WOLF_WINDOW_W >> 1) * (1 + transf.x / transf.y));
 		printf("screen %d\n", screen);
@@ -112,6 +118,7 @@ void	draw_sprites(t_wolf3d *wolf, t_ray *dir)
 		draw_start_y = -(h >> 1) + (WOLF_WINDOW_H >> 1);
 		if (draw_start_y < 0)
 			draw_start_y = 0;
+
 		draw_end_y = (h >> 1) + (WOLF_WINDOW_H >> 1);
 		if (draw_end_y >= WOLF_WINDOW_H)
 			draw_end_y = WOLF_WINDOW_H - 1;
@@ -119,23 +126,28 @@ void	draw_sprites(t_wolf3d *wolf, t_ray *dir)
 		w = abs((int)(WOLF_WINDOW_H/transf.y));
 		printf("Width: %d\n", w);
 
-		draw_start_x = -(w >> 1) + screen;
+		draw_start_x = -(w >> 1) + screen; //something here
 		if (draw_start_x < 0)
 			draw_start_x = 0;
+
 		draw_end_x = (w >> 1) + screen;
 		if (draw_end_x >= WOLF_WINDOW_W)
 			draw_end_x = WOLF_WINDOW_W - 1;
+
 		printf("draw_start_x %d, draw_end_x %d\n", draw_start_x, draw_end_x);
 		printf("draw_start_y %d, draw_end_y %d\n\n", draw_start_y, draw_end_y);
+//		for (int k = 0; k < WOLF_WINDOW_W;k++)
+//			printf("%.2f ", wolf->sprite->zbuffer[k]);
+		printf("\n");
+
 		while (draw_start_x < draw_end_x)
 		{
 			int tex_x = (int)(256 * (draw_start_x - (-w / 2 + screen)) * CHUNK_SIZE / w) / 256;
 //			int tex_x = (int)((draw_start_x - (-(w >> 1) + screen)) * CHUNK_SIZE / w);
-
+//			printf("dir %.2f\n", wolf->sprite->zbuffer[draw_start_x]);
 			if (transf.y > 0 && draw_start_x > 0 && draw_start_x < WOLF_WINDOW_W &&
 					transf.y < wolf->sprite->zbuffer[draw_start_x])
 			{
-				printf("dist %.2f\n", wolf->sprite->zbuffer[draw_start_x]);
 				while (draw_start_y < draw_end_y)
 				{
 					int d = (draw_start_y) * 256 - WOLF_WINDOW_H * 128 + h * 128;
