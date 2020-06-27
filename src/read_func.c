@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 16:02:33 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/03/01 16:48:02 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/06/08 19:40:38 by h1ken            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,16 @@ static void		get_map_w_h(t_wolf3d *wolf, char *s)
 {
 	wolf->map->w = ft_atoi(s);
 	wolf->map->h = ft_atoi(ft_strchr(s, ' '));
-	if (wolf->map->w == 0 || wolf->map->h == 0)
+	if (wolf->map->w == 0 || wolf->map->h == 0 || wolf->map->w > 64
+			|| wolf->map->h > 64)
 		terminate("Check your map (map dimensions)");
 	create_grid(wolf);
 }
 
 static void		get_player_pos(t_wolf3d *wolf, char *s)
 {
-	if ((wolf->player->pos.x = ft_atoi(s)) == 0 ||
+	wolf->player->pos.x = ft_atoi(s);
+	if (wolf->player->pos.x == 0 ||
 			(wolf->player->pos.y = ft_atoi(ft_strchr(s, ' ') + 1)) == 0)
 		terminate("Check your map (player pos)");
 }
@@ -37,6 +39,10 @@ static uint32_t	parse_char(char c)
 		return (1);
 	if (c == 'c')
 		return (2);
+	if (c == 'a')
+		return (3);
+	if (c == 'd')
+		return (4);
 	return (0);
 }
 
@@ -57,7 +63,7 @@ static void		get_map_line(t_wolf3d *wolf, char *s, int *i)
 	(*i)++;
 }
 
-int				read_map(char *f_name, t_wolf3d *wolf)
+void				read_map(char *f_name, t_wolf3d *wolf)
 {
 	char	*s;
 	int		got;
@@ -78,10 +84,10 @@ int				read_map(char *f_name, t_wolf3d *wolf)
 			get_map_line(wolf, s, &i);
 		free(s);
 	}
+	close(fd);
 	if (i != wolf->map->h)
 		terminate("Check your map (less strings)");
-	print_map(wolf);
 	if (got == -1)
 		terminate("Read error");
-	return (0);
+	ft_validator(wolf);
 }

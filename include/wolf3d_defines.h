@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d_defines.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cstripeb <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 11:37:17 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/03/14 12:57:39 by cstripeb         ###   ########.fr       */
+/*   Updated: 2020/06/08 20:00:10 by h1ken            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,16 @@
 # define G_MASK 0x0000ff00
 # define B_MASK 0x000000ff
 
-# define VALID_MAP_SYMBOLS " cw"
+# define VALID_MAP_SYMBOLS " cwad"
 
 # define GO_FORWARD SDLK_w
 # define GO_BACKWARD SDLK_s
 # define TURN_LEFT SDLK_a
 # define TURN_RIGHT SDLK_d
 # define EXIT_KEY SDLK_ESCAPE
+# define TURN_TEXTURES SDLK_t
+
+# define FLOOR_COLOR 0x00505050
+# define CEILING_COLOR 0x0000BFFF
 
 #endif
