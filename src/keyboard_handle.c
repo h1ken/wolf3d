@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard_handle.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 10:59:39 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/16 15:43:33 by h1ken            ###   ########.fr       */
+/*   Updated: 2020/06/30 17:01:34 by hdean            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int			key_press_handle(SDL_Keycode key, t_wolf3d *wolf)
 {
 	if (key == EXIT_KEY)
 		return (0);
-	if  (key == SDLK_9 || key == SDLK_8)
+	if (key == SDLK_9 || key == SDLK_8)
 		music_manip(key, wolf);
 	if (key == SDLK_LSHIFT)
 		wolf->player->speed = 0.5;

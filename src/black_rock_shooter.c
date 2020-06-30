@@ -3,24 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   black_rock_shooter.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 16:31:02 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/16 16:26:09 by h1ken            ###   ########.fr       */
+/*   Updated: 2020/06/30 16:53:34 by hdean            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void    draw_weapon(t_sdl_info *isdl, t_wolf3d *wolf)
+void	draw_weapon(t_sdl_info *isdl, t_wolf3d *wolf)
 {
-	static int	x = 0;
+	static int	x;
 	int			i;
 	int			j;
 	int			*texture;
-	int color;
+	int			color;
 
 	i = 0;
+	x = 0;
 	texture = (int *)wolf->textures->objects[5]->pixels;
 	while (i < 34)
 	{

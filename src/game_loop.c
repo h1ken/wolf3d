@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:20:18 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/16 17:07:05 by h1ken            ###   ########.fr       */
+/*   Updated: 2020/06/30 17:00:52 by hdean            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int		check_events(t_wolf3d *wolf, t_sdl_info *i_sdl)
 	return (1);
 }
 
-t_ray	get_dir_ray(t_wolf3d *wolf, double camera_x)
+t_ray			get_dir_ray(t_wolf3d *wolf, double camera_x)
 {
 	t_ray	res;
 
@@ -65,7 +65,7 @@ static void		expand_ray(t_wolf3d *wolf, t_ray *dr, t_vec3i *cell,
 	}
 }
 
-double	perform_dda(t_wolf3d *wolf, t_ray *dir_ray, t_vec3i *cell)
+double			perform_dda(t_wolf3d *wolf, t_ray *dir_ray, t_vec3i *cell)
 {
 	double	wall_dist_perp;
 	t_vec3i	step;
@@ -91,7 +91,7 @@ double	perform_dda(t_wolf3d *wolf, t_ray *dir_ray, t_vec3i *cell)
 void			loop(t_wolf3d *wolf, t_sdl_info *isdl)
 {
 	int		event;
-	
+
 	wolf->oldtime = SDL_GetTicks();
 	wolf->time = SDL_GetTicks();
 	wolf->ftime = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 10:57:51 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/08 23:04:13 by h1ken            ###   ########.fr       */
+/*   Updated: 2020/06/30 16:53:52 by hdean            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static int		pick_color(t_wolf3d *wolf, t_vec3i cell, int side)
 {
 	int color;
 
-	//do we need this for solid colors?
 	if (wolf->map->grid[cell.y][cell.x] == 1)
 		color = 0x007f0000;
 	else if (wolf->map->grid[cell.y][cell.x] == 2)

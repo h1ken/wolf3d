@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 13:39:30 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/16 15:38:50 by h1ken            ###   ########.fr       */
+/*   Updated: 2020/06/30 17:05:14 by hdean            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 	read_map(av[1], wolf);
 	read_textures(wolf);
 	get_sound(wolf);
-	loop(wolf, i_sdl); ////////////////////////////////////////////////////////
+	loop(wolf, i_sdl);
 	SDL_DestroyWindow(i_sdl->w);
 	Mix_Quit();
 	SDL_Quit();

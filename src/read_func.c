@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 16:02:33 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/08 19:40:38 by h1ken            ###   ########.fr       */
+/*   Updated: 2020/06/30 17:05:36 by hdean            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void		get_map_line(t_wolf3d *wolf, char *s, int *i)
 	(*i)++;
 }
 
-void				read_map(char *f_name, t_wolf3d *wolf)
+void			read_map(char *f_name, t_wolf3d *wolf)
 {
 	char	*s;
 	int		got;

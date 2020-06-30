@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 14:37:11 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/16 17:06:58 by h1ken            ###   ########.fr       */
+/*   Updated: 2020/06/30 17:45:01 by hdean            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,19 +92,19 @@ typedef struct	s_ray
 	int			side;
 }				t_ray;
 
-typedef struct  s_textures //mine
+typedef	struct	s_textures
 {
-    int         flag;
-    SDL_Surface *wall[15]; //check for actual quantity
-    SDL_Surface *door[3];
-    SDL_Surface *objects[6];
-    SDL_Surface *floor[2];
-    SDL_Surface *ceiling[2];
-    int         x;
-    int         y;
-    double      step;
-    double      pos;
-}               t_textures;
+	int			flag;
+	SDL_Surface	*wall[15];
+	SDL_Surface	*door[3];
+	SDL_Surface	*objects[6];
+	SDL_Surface	*floor[2];
+	SDL_Surface	*ceiling[2];
+	int			x;
+	int			y;
+	double		step;
+	double		pos;
+}				t_textures;
 
 typedef struct	s_wolf3d
 {
@@ -113,7 +113,7 @@ typedef struct	s_wolf3d
 	t_vec3d		cam;
 	SDL_Surface	*w_surf;
 	t_map		*map;
-	t_textures  *textures; //mine
+	t_textures	*textures;
 	Mix_Music	*music;
 	double		time;
 	double		oldtime;
@@ -121,9 +121,8 @@ typedef struct	s_wolf3d
 }				t_wolf3d;
 
 int				init(t_wolf3d **wolf, t_sdl_info **i_sdl);
-//void			draw_wall(t_wolf3d *wolf, t_vec3i cell, double wall_dist,
-//							int side);
-void			draw_wall(t_wolf3d *wolf, t_vec3i cell, double wall_dist, t_ray *ray_dir);
+void			draw_wall(t_wolf3d *wolf, t_vec3i cell, double wall_dist,
+				t_ray *ray_dir);
 t_vec3i			get_player_pos_integer(t_wolf3d *wolf);
 void			terminate(char *msg);
 void			unit_move(t_wolf3d *wolf, t_unit *unit);
@@ -143,8 +142,6 @@ void			get_sound(t_wolf3d *wolf);
 void			do_raycasting_magic(t_wolf3d *wolf);
 t_ray			get_dir_ray(t_wolf3d *wolf, double camera_x);
 double			perform_dda(t_wolf3d *wolf, t_ray *dir_ray, t_vec3i *cell);
-
-/////////////////////////
-int             read_textures(t_wolf3d *wolf);
-void            draw_floor_ceiling(t_wolf3d *wolf);
+int				read_textures(t_wolf3d *wolf);
+void			draw_floor_ceiling(t_wolf3d *wolf);
 #endif

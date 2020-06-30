@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   utils_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/01 16:43:16 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/16 17:06:52 by h1ken            ###   ########.fr       */
+/*   Updated: 2020/06/30 17:08:16 by hdean            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 #include <stdio.h>
 
-void	print_map(t_wolf3d *wolf)
+void		print_map(t_wolf3d *wolf)
 {
 	int i;
 	int j;
@@ -31,7 +31,7 @@ void	print_map(t_wolf3d *wolf)
 	}
 }
 
-t_vec3i	get_player_pos_integer(t_wolf3d *wolf)
+t_vec3i		get_player_pos_integer(t_wolf3d *wolf)
 {
 	t_vec3i res;
 
@@ -40,7 +40,7 @@ t_vec3i	get_player_pos_integer(t_wolf3d *wolf)
 	return (res);
 }
 
-void	unit_move(t_wolf3d *wolf, t_unit *unit)
+void		unit_move(t_wolf3d *wolf, t_unit *unit)
 {
 	if (unit->flags & 1)
 	{
@@ -64,15 +64,15 @@ void	unit_move(t_wolf3d *wolf, t_unit *unit)
 
 SDL_Surface	*create_surface(int w, int h)
 {
-    SDL_Surface *res;
+	SDL_Surface *res;
 
-    res = SDL_CreateRGBSurface(0, w, h, 32, R_MASK, G_MASK, B_MASK, A_MASK);
-    if (!res)
-    {
-        ft_putendl("heh");
-        return (NULL);
-    }
-    SDL_SetSurfaceBlendMode(res, SDL_BLENDMODE_NONE);
-    ft_bzero(res->pixels, res->h * res->pitch);
-    return (res);
+	res = SDL_CreateRGBSurface(0, w, h, 32, R_MASK, G_MASK, B_MASK, A_MASK);
+	if (!res)
+	{
+		ft_putendl("heh");
+		return (NULL);
+	}
+	SDL_SetSurfaceBlendMode(res, SDL_BLENDMODE_NONE);
+	ft_bzero(res->pixels, res->h * res->pitch);
+	return (res);
 }
