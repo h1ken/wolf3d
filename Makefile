@@ -6,7 +6,7 @@
 #    By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/16 12:59:52 by cstripeb          #+#    #+#              #
-#    Updated: 2020/06/30 17:55:03 by hdean            ###   ########.fr        #
+#    Updated: 2020/07/01 23:05:58 by hdean            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,9 @@ INC_DIR = ./include/
 LIB_DIR = ./lib/
 OBJ_DIR = ./objs/
 
-F_SRCS = main.c initializations_1.c game_loop.c draw_functions.c \
+F_SRCS = main.c initializations.c game_loop.c draw_functions.c \
 		 keyboard_handle.c read_func.c exit_and_errors.c \
-		 utils_1.c black_rock_shooter.c textures.c floor.c \
+		 utils.c black_rock_shooter.c textures.c floor.c \
 		 ft_validation.c
 SRCS = $(addprefix $(SRC_DIR), $(F_SRCS))
 OBJS = $(addprefix $(OBJ_DIR), $(F_SRCS:.c=.o))
@@ -49,6 +49,8 @@ ifeq ($(UNAME_OS),Linux)
 	LNK += -lSDL2 -lSDL2_mixer
 endif
 
+FLAGS = -Wall -Wextra -Werror
+
 .PHONY: all
 all: $(NAME)
 
@@ -59,7 +61,7 @@ $(NAME): $(LIBFT_AP) $(OBJS)
 $(OBJS): $(INC_DIR)/wolf3d.h $(INC_DIR)/wolf3d_defines.h | $(OBJ_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	$(CC) $(INC) -c $< -o $@
+	$(CC) $(INC) $(FLAGS) -c $< -o $@
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)

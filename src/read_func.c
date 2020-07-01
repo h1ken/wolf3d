@@ -6,7 +6,7 @@
 /*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 16:02:33 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/30 17:05:36 by hdean            ###   ########.fr       */
+/*   Updated: 2020/07/01 18:52:22 by hdean            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ static void		get_map_line(t_wolf3d *wolf, char *s, int *i)
 {
 	int x;
 
-	if (*i == wolf->map->h)
+	if (*i == (int)wolf->map->h)
 		terminate("Check your map (more strings)");
 	if (ft_strlen(s) != wolf->map->w)
 		terminate("Check your map (different length string)");
 	x = 0;
-	while (x < wolf->map->w)
+	while (x < (int)wolf->map->w)
 	{
 		wolf->map->grid[*i][x] = parse_char(s[x]);
 		x++;
@@ -85,7 +85,7 @@ void			read_map(char *f_name, t_wolf3d *wolf)
 		free(s);
 	}
 	close(fd);
-	if (i != wolf->map->h)
+	if (i != (int)wolf->map->h)
 		terminate("Check your map (less strings)");
 	if (got == -1)
 		terminate("Read error");

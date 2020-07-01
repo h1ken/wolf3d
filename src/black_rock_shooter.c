@@ -6,22 +6,21 @@
 /*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 16:31:02 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/30 16:53:34 by hdean            ###   ########.fr       */
+/*   Updated: 2020/07/01 18:55:17 by hdean            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void	draw_weapon(t_sdl_info *isdl, t_wolf3d *wolf)
+void	draw_weapon(t_wolf3d *wolf)
 {
-	static int	x;
+	static int	x = 0;
 	int			i;
 	int			j;
 	int			*texture;
 	int			color;
 
 	i = 0;
-	x = 0;
 	texture = (int *)wolf->textures->objects[5]->pixels;
 	while (i < 34)
 	{

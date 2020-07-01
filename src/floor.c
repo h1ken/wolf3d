@@ -6,7 +6,7 @@
 /*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 16:58:01 by hdean             #+#    #+#             */
-/*   Updated: 2020/06/30 17:39:42 by hdean            ###   ########.fr       */
+/*   Updated: 2020/07/01 22:59:51 by hdean            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,24 @@ static	void	calculations_floor(t_wolf3d *wolf, t_vec3d *floor_step,
 	floor->y = wolf->player->pos.y + row_dist * dir_left.y;
 }
 
-static	int	calculation_text_floor(t_vec3d *floor, t_vec3d *floor_step)
+static	int		calculation_text_floor(t_vec3d *floor, t_vec3d *floor_step)
 {
 	t_vec3i	t;
 	t_vec3i	cell;
+	t_vec3i	tmp;
 
-	cell.x = (int)floor->x;
-	cell.y = (int)floor->y;
-	t.x = (int)(CHUNK_SIZE * (floor->x - cell.x)) & (CHUNK_SIZE - 1);
-	t.y = (int)(CHUNK_SIZE * (floor->y - cell.y)) & (CHUNK_SIZE - 1);
+	cell.x = (int)(floor->x);
+	cell.y = (int)(floor->y);
+	tmp.x = (int)((floor->x - cell.x) * CHUNK_SIZE);
+	tmp.y = (int)((floor->y - cell.y) * CHUNK_SIZE);
+	t.x = tmp.x & (int)(CHUNK_SIZE - 1);
+	t.y = tmp.y & (int)(CHUNK_SIZE - 1);
 	floor->x += floor_step->x;
 	floor->y += floor_step->y;
 	return (t.x + CHUNK_SIZE * t.y);
 }
 
-static void floor_casting(t_wolf3d *wolf)
+static	void	floor_casting(t_wolf3d *wolf)
 {
 	t_vec3d floor_step;
 	t_vec3d floor;
@@ -71,14 +74,14 @@ static void floor_casting(t_wolf3d *wolf)
 	}
 }
 
-void    draw_floor_ceiling(t_wolf3d *wolf)
+void			draw_floor_ceiling(t_wolf3d *wolf)
 {
 	int i;
 	int end_point;
 	int *tmp;
 
-	//SDL_FillRect(wolf->w_surf, NULL, 0x00000000);
-	if (wolf->textures->flag == 1) 
+	SDL_FillRect(wolf->w_surf, NULL, 0);
+	if (wolf->textures->flag == 1)
 	{
 		end_point = WOLF_WINDOW_W * WOLF_WINDOW_H;
 		tmp = (int *)(wolf->w_surf->pixels);
@@ -87,7 +90,7 @@ void    draw_floor_ceiling(t_wolf3d *wolf)
 			tmp[i++] = CEILING_COLOR;
 		while (i < end_point)
 			tmp[i++] = FLOOR_COLOR;
-	} 
+	}
 	else if (wolf->textures->flag == 2)
 		floor_casting(wolf);
 }

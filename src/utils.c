@@ -6,30 +6,11 @@
 /*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/01 16:43:16 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/30 17:08:16 by hdean            ###   ########.fr       */
+/*   Updated: 2020/07/01 19:04:39 by hdean            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-#include <stdio.h>
-
-void		print_map(t_wolf3d *wolf)
-{
-	int i;
-	int j;
-
-	i = -1;
-	printf("W: %d\t H: %d\n", wolf->map->w, wolf->map->h);
-	while (++i < wolf->map->h)
-	{
-		j = -1;
-		while (++j < wolf->map->w)
-		{
-			printf("%d", wolf->map->grid[i][j]);
-		}
-		printf("\n");
-	}
-}
 
 t_vec3i		get_player_pos_integer(t_wolf3d *wolf)
 {

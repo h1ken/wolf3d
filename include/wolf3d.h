@@ -6,7 +6,7 @@
 /*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 14:37:11 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/30 17:45:01 by hdean            ###   ########.fr       */
+/*   Updated: 2020/07/01 23:07:14 by hdean            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include <stdlib.h>
 # include <stdint.h>
 # include <errno.h>
-# include "SDL/SDL.h"
-# include "SDL/SDL_mixer.h"
+# include "SDL.h"
+# include "SDL_mixer.h"
 # include "libft.h"
 # include "wolf3d_defines.h"
 
@@ -134,14 +134,14 @@ int				key_up_handle(SDL_Keycode e, t_wolf3d *wolf);
 void			read_map(char *f_name, t_wolf3d *wolf);
 int				create_window(t_sdl_info *i_sdl);
 int				create_grid(t_wolf3d *wolf);
-void			print_map(t_wolf3d *wolf);
 SDL_Surface		*create_surface(int w, int h);
 void			ft_validator(t_wolf3d *wolf);
-void			draw_weapon(t_sdl_info *isdl, t_wolf3d *wolf);
+void			draw_weapon(t_wolf3d *wolf);
 void			get_sound(t_wolf3d *wolf);
 void			do_raycasting_magic(t_wolf3d *wolf);
 t_ray			get_dir_ray(t_wolf3d *wolf, double camera_x);
 double			perform_dda(t_wolf3d *wolf, t_ray *dir_ray, t_vec3i *cell);
 int				read_textures(t_wolf3d *wolf);
 void			draw_floor_ceiling(t_wolf3d *wolf);
+
 #endif

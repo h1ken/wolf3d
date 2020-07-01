@@ -6,7 +6,7 @@
 /*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 10:59:39 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/30 17:01:34 by hdean            ###   ########.fr       */
+/*   Updated: 2020/07/01 18:49:41 by hdean            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ int			key_press_handle(SDL_Keycode key, t_wolf3d *wolf)
 	if (key == TURN_LEFT || key == TURN_RIGHT)
 		rotate_kb(wolf, key);
 	if (key == TURN_TEXTURES)
-		wolf->textures->flag = ++(wolf->textures->flag) % 3;
+	{
+		wolf->textures->flag += 1;
+		wolf->textures->flag %= 3;
+	}
 	unit_move(wolf, wolf->player);
 	return (1);
 }

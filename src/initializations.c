@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   initializations_1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: h1ken <h1ken@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:15:16 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/16 16:04:17 by h1ken            ###   ########.fr       */
+/*   Updated: 2020/07/01 22:55:46 by hdean            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+#include <math.h>
 
 static int	init_wolf3d(t_wolf3d **wolf)
 {
@@ -70,7 +71,7 @@ int			create_window(t_sdl_info *i_sdl)
 
 int			create_grid(t_wolf3d *wolf)
 {
-	int i;
+	uint32_t i;
 
 	wolf->map->grid = (uint32_t **)ft_memalloc(sizeof(*(wolf->map->grid))
 												* wolf->map->h);

@@ -6,14 +6,13 @@
 /*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:20:18 by cstripeb          #+#    #+#             */
-/*   Updated: 2020/06/30 17:00:52 by hdean            ###   ########.fr       */
+/*   Updated: 2020/07/01 19:08:10 by hdean            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-#include <math.h>
 
-static int		check_events(t_wolf3d *wolf, t_sdl_info *i_sdl)
+static int		check_events(t_wolf3d *wolf)
 {
 	SDL_Event	e;
 
@@ -105,10 +104,10 @@ void			loop(t_wolf3d *wolf, t_sdl_info *isdl)
 		if (wolf->ftime >= 1000.0 / 61.0)
 		{
 			do_raycasting_magic(wolf);
-			draw_weapon(isdl, wolf);
+			draw_weapon(wolf);
 			SDL_UpdateWindowSurface(isdl->w);
 			wolf->oldtime = wolf->time;
-			event = check_events(wolf, isdl);
+			event = check_events(wolf);
 		}
 	}
 }
