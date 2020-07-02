@@ -55,13 +55,12 @@ FLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): $(LIBFT_AP) $(OBJS)
-#	$(CC) $(INC) $(LNK) $(OBJS) -o $(NAME)
-	gcc -Wall -Wextra -Werror -g -o $(NAME) $(OBJS) $(INC) $(LNK)
+	gcc -o $(NAME) $(OBJS) $(INC) $(LNK)
 
 $(OBJS): $(INC_DIR)/wolf3d.h $(INC_DIR)/wolf3d_defines.h | $(OBJ_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	$(CC) -Wall -Wextra -Werror -g $(INC) $(FLAGS) -c $< -o $@
+	$(CC) $(INC) $(FLAGS) -c $< -o $@
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
